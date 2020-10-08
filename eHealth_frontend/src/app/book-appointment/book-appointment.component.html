@@ -1,0 +1,24 @@
+<p>Book an appointment!</p>
+<select name="select-speciality" (click)= listPhysicians($event)>
+    <option >Select Speciality</option>
+    <option value="Pediatrician">Pediatrician</option>
+    <option value="Gynecologist">Gynecologist</option>
+    <option value="Surgeon">Surgeon</option>
+    <option value="Cardiologist">Cardiologist</option>
+    <option value="Dermatologist">Dermatologist</option>
+</select>
+
+
+<div *ngFor="let physician of physicians">
+    <h3>{{physician.firstName}}</h3>
+    <span> Speciality - {{physician.speciality}}</span>
+    <button (click) = showDateAndSlot(physician.physicianId)>Book Appointment</button>
+    <div *ngIf="showDateAndTimeSlotFor === physician.physicianId">
+        <input type="date" name= "date" [(ngModel)]="appointment.date" placeholder="yyyy-MM-dd">
+        <button (click)="getAvailableSlots(physician.physicianId)">Check Available Slots</button>
+        <div *ngFor="let availableSlot of availableSlots" routerLink="confirmBooking/{{physician.physicianId}}/{{availableSlot.availabilityId}}">{{availableSlot.startTime}}</div>
+    </div>
+
+    
+</div>
+

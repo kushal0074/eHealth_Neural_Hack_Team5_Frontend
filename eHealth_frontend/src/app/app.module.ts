@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 // import Http module
 import { HttpModule} from '@angular/http';
 // import ReactiveFormsModule for reactive form
-import { ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 // import module for Routing.
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -34,6 +34,8 @@ import { PhysicianComponent } from './physician/physician.component';
 import { AppointmentComponent } from './physician/appointment/appointment.component';
 import {MatTableModule} from '@angular/material/table';
 import { RecordComponent } from './physician/record/record.component';
+import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
+import { ConfirmBookingComponent } from './book-appointment/confirm-booking/confirm-booking.component';
 
 
 
@@ -47,6 +49,8 @@ import { RecordComponent } from './physician/record/record.component';
     HospitalAdminComponent,
     PatientComponent,
     AddMemberComponent,
+    BookAppointmentComponent,
+    ConfirmBookingComponent,
     PhysicianComponent,
     AppointmentComponent,
     RecordComponent,
@@ -56,6 +60,7 @@ import { RecordComponent } from './physician/record/record.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     MatDialogModule,
     MatCardModule,
@@ -104,6 +109,20 @@ import { RecordComponent } from './physician/record/record.component';
       {
         path : 'physician/record/:adminId',
         component : RecordComponent
+      },
+      {
+        path : 'bookappointment',
+        
+        children : [
+          {
+            path: "",
+            component: BookAppointmentComponent
+          },
+          {
+            path: 'confirmBooking/:physicianId/:availabilityId',
+            component : ConfirmBookingComponent,
+          }  
+        ]
       }
     ]),
 

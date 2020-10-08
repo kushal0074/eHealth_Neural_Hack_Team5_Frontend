@@ -9,6 +9,9 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { AdminDetail } from '../classes/admin-detail';
 import { Router } from '@angular/router';
+import { Availablity } from '../classes/availablity';
+import { Appointment } from '../classes/appointment';
+import { Physician } from '../classes/physician';
 
 
 const httpOptions = {
@@ -69,6 +72,36 @@ getAppointmentById(id: string): Observable<AppointmentResponse[]>
   return this.http.get<GetResponse>(this.baseUrl + 'appointment/get-appointment/'+ id).pipe(
     map(response => response.data)
   );
+}
+getPhysician(physicianId : String) : Observable<Physician>
+{
+  return this.http.get<Physician>(`http://localhost:8085/appointment/get-physician/${physicianId}`).pipe(
+    map(response => response)
+  );
+}
+
+getPhysicians(speciality: String) : Observable<Physician[]>
+{
+  
+  return this.http.get<Physician[]>(`http://localhost:8085/appointment/get-physicians/${speciality}`).pipe(
+    map(response => response)
+  )
+}
+
+getAvailibilty(availablityId: String): Observable<Availablity>
+{
+  return this.http.get<Availablity>(`http://localhost:8085/appointment/get-slot/${availablityId}`)
+}
+
+getAvailableSlots(physicianId: String, date: Date): Observable<Availablity[]>
+{
+  console.log("date" + date);
+  console.log("id" + physicianId);
+  return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`)
+}
+
+saveAppointment(appointment : Appointment): Observable<Appointment>{
+  return this.http.post<Appointment>("http://localhost:8085/appointment/set-appointment", appointment);
 }
 
 }

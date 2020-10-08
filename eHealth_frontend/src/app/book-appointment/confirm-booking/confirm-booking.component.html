@@ -1,0 +1,15 @@
+<p>confirm-booking works!</p> 
+
+<h1>Appointment Details</h1>
+
+<hr>
+
+<div>On {{availabilty.date}} at {{availabilty.startTime}}</div>
+
+
+<div class="doctorDetails">
+    Dr. {{physician.firstName}} {{physician.lastName}} -
+    {{physician.speciality}}
+</div>
+
+<button (click)="saveAppointment()">Confirm Booking</button>
