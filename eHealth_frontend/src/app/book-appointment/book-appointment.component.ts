@@ -12,10 +12,10 @@ import { Time } from '@angular/common';
   styleUrls: ['./book-appointment.component.css']
 })
 export class BookAppointmentComponent implements OnInit {
-  physicians: Physician[] = [];
+  physicians: Physician[];
   showDateAndTimeSlotFor: String;
-  availableSlots: Availablity[] = [];
-  appointment: Appointment = new Appointment();
+  availableSlots: Availablity[];
+  appointment = new Appointment();
   slotSelected: Time;
   sum: number;
   constructor(private adminService: AdminService) { }
@@ -29,11 +29,11 @@ export class BookAppointmentComponent implements OnInit {
     this.adminService.getPhysicians(event.target.value).subscribe(
       data => this.physicians = data
     )
-    
+
   }
 
   showDateAndSlot(physicianId: String){
-    console.log("physicanshow" + physicianId);
+    console.log("physicanshow " + physicianId);
     this.showDateAndTimeSlotFor = physicianId;
     console.log(this.showDateAndTimeSlotFor);
   }
