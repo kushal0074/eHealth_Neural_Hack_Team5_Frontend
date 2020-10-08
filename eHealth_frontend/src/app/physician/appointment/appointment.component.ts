@@ -20,7 +20,6 @@ export class AppointmentComponent implements OnInit {
     this.adminService.getAppointmentById(this.tokenService.getUser().id).subscribe(
       data => {
         this.dataSource = data;
-
         console.log('appointment obj ' +data);
       }
     )
