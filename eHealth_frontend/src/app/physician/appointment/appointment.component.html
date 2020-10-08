@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><h2 style="margin-top: 10px; margin-left: 10px;">WELCOME TO EHEALTH  |  PHYSICIAN PANEL</h2></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav" >
+    <ul class="navbar-nav" ml-auto>
+      <li class="nav-item ">
+        <a class="nav-link" href="physician-panel/{{token}}">Home </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="physician/appointment-panel/{{token}}">Appointment </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="physician/record/{{token}}">Record</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)= "logout()" href="login">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class ="table">
+  <mat-table  [dataSource] = "dataSource">
+  <ng-container matColumnDef = "appointmentId">
+    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Appointment ID</h2></mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.appointmentId}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "physicianId">
+    <mat-header-cell *matHeaderCellDef><h2>Physician ID</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.physicianId}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "patientId">
+    <mat-header-cell *matHeaderCellDef> <h2>Patient ID</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.patientId}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "date">
+    <mat-header-cell *matHeaderCellDef> <h2>Date</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.date}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "time">
+    <mat-header-cell *matHeaderCellDef><h2>Time</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef = "displayedColumns" >
+    <mat-row *matRowDef = "let row; columns: displayedColumns"></mat-row>
+  </mat-header-row>
+
+</mat-table>
+</div>

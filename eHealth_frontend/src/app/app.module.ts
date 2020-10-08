@@ -30,6 +30,10 @@ import { AdminService } from './services/admin.service';
 import { HospitalAdminComponent } from './hospital-admin/hospital-admin.component';
 import { PatientComponent } from './patient/patient.component';
 import { AddMemberComponent } from './hospital-admin/add-member/add-member.component';
+import { PhysicianComponent } from './physician/physician.component';
+import { AppointmentComponent } from './physician/appointment/appointment.component';
+import {MatTableModule} from '@angular/material/table';
+import { RecordComponent } from './physician/record/record.component';
 
 
 
@@ -43,6 +47,10 @@ import { AddMemberComponent } from './hospital-admin/add-member/add-member.compo
     HospitalAdminComponent,
     PatientComponent,
     AddMemberComponent,
+    PhysicianComponent,
+    AppointmentComponent,
+    RecordComponent,
+
 
   ],
   imports: [
@@ -57,6 +65,9 @@ import { AddMemberComponent } from './hospital-admin/add-member/add-member.compo
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatTableModule,
     RouterModule.forRoot([
       {
         path : '',
@@ -81,6 +92,18 @@ import { AddMemberComponent } from './hospital-admin/add-member/add-member.compo
       {
         path : 'addmember/:adminId',
         component : AddMemberComponent
+      },
+      {
+        path : 'physician-panel/:adminId',
+        component : PhysicianComponent
+      },
+      {
+        path : 'physician/appointment-panel/:adminId',
+        component : AppointmentComponent
+      },
+      {
+        path : 'physician/record/:adminId',
+        component : RecordComponent
       }
     ]),
 

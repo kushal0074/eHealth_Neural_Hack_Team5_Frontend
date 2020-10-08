@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
       {
         this.router.navigate(['hospital-admin', this.tokenService.getToken()]);
       }
+      else if(this.tokenService.getUser().roles == 'DOCTOR')
+      {
+        this.router.navigate(['physician-panel', this.tokenService.getToken()]);
+      }
       else{
       this.router.navigate(['profile', this.tokenService.getToken()]);
     }
@@ -65,6 +69,10 @@ else{
               this.tokenService.saveUser(data);
               if(data.roles == 'ADMIN'){
               this.router.navigate(['hospital-admin',this.tokenService.getToken()]);
+              }
+              else if(this.tokenService.getUser().roles == 'DOCTOR')
+              {
+                this.router.navigate(['physician-panel', this.tokenService.getToken()]);
               }
               else {
                 this.router.navigate(['profile', this.tokenService.getToken()]);

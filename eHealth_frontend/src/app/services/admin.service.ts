@@ -1,14 +1,15 @@
+import { AppointmentResponse } from './../classes/appointment-response';
 import { DoctorDetail } from './../classes/doctor-detail';
 import { FormGroup } from '@angular/forms';
 import { TokenStorageService } from './token-storage.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { AdminDetail } from '../classes/admin-detail';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -49,7 +50,7 @@ export class AdminService {
   logout()
   {
     this.tokenService.signOut();
-
+    this.router.navigate(['login']);
   }
 
 getAllUsers(): Observable<any>
@@ -59,6 +60,19 @@ getAllUsers(): Observable<any>
 
 addDoctor(doctordetail : DoctorDetail): Observable<any>
 {
-  return this.http.post(this.baseUrl + 'addDoctor', doctordetail, httpOptions);
+  return this.http.post(this.baseUrl + 'addPhysician', doctordetail, httpOptions);
 }
+
+// physician service
+getAppointmentById(id: string): Observable<AppointmentResponse[]>
+{
+  return this.http.get<GetResponse>(this.baseUrl + 'appointment/get-appointment/'+ id).pipe(
+    map(response => response.data)
+  );
+}
+
+}
+interface GetResponse
+{
+    data: AppointmentResponse[];
 }
