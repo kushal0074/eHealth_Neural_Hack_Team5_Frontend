@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../../services/token-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Appointment } from '../../classes/appointment';
@@ -15,10 +16,11 @@ export class ConfirmBookingComponent implements OnInit {
   physician: Physician = new Physician();
   availabilty: Availablity = new Availablity();
   appointment: Appointment = new Appointment();
-  
+  private tokenStorageService = new TokenStorageService();
+
   constructor(private adminSerivce: AdminService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
-  
+
   ngOnInit(): void {
     const isIdPresentPhysician = this.activatedRoute.snapshot.paramMap.has('physicianId');
     if(isIdPresentPhysician){
@@ -27,7 +29,7 @@ export class ConfirmBookingComponent implements OnInit {
       this.adminSerivce.getPhysician(id).subscribe(
         data => this.physician = data
       );
-      
+
     }
 
     const isIdPresenAvailibilty = this.activatedRoute.snapshot.paramMap.has('availabilityId');
@@ -37,7 +39,7 @@ export class ConfirmBookingComponent implements OnInit {
         data => this.availabilty = data
       );
     }
-     
+
   }
 
   saveAppointment(){
@@ -46,7 +48,7 @@ export class ConfirmBookingComponent implements OnInit {
     this.appointment.startTime = this.availabilty.startTime;
     this.appointment.endTime = this.availabilty.endTime;
     this.appointment.date = this.availabilty.date;
-    this.appointment.patientId ="000000";
+    this.appointment.patientId = this.tokenStorageService.getUser().id;
 
     this.adminSerivce.saveAppointment(this.appointment).subscribe(
       data => {

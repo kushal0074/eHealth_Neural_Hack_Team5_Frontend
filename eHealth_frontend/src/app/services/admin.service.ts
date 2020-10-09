@@ -37,12 +37,9 @@ export class AdminService {
         emailId :  adminDetail.emailId,
         username  : adminDetail.username,
         phone : adminDetail.phone,
+        govermentId : adminDetail.govermentId,
         password : adminDetail.password,
-        roles : [
-          {
-            role : 'PATIENT'
-          }
-        ]
+        roles : 'PATIENT'
       }, httpOptions);
   }
   login(adminDetail: AdminDetail): Observable<any>
@@ -82,7 +79,7 @@ getPhysician(physicianId : String) : Observable<Physician>
 
 getPhysicians(speciality: String) : Observable<Physician[]>
 {
-  
+
   return this.http.get<Physician[]>(`http://localhost:8085/appointment/get-physicians/${speciality}`).pipe(
     map(response => response)
   )
@@ -104,7 +101,18 @@ saveAppointment(appointment : Appointment): Observable<Appointment>{
   return this.http.post<Appointment>("http://localhost:8085/appointment/set-appointment", appointment);
 }
 
+getPatientById(id: string): Observable<AdminDetail>
+{
+  return this.http.get<GetResponsePatient>(this.baseUrl + 'getPatientById/' + id).pipe(
+    map(response => response.data)
+  );
 }
+}
+interface GetResponsePatient
+{
+    data: AdminDetail;
+}
+
 interface GetResponse
 {
     data: AppointmentResponse[];

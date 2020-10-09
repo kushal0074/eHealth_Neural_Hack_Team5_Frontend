@@ -20,11 +20,12 @@
     </ul>
   </div>
 </nav>
+<h2 style="margin-top: 50px; align-content: center; margin-left: 5%; font-size: 40px;">Appointment Details</h2>
 <div class ="table">
   <mat-table  [dataSource] = "dataSource">
   <ng-container matColumnDef = "appointmentId">
     <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Appointment ID</h2></mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.appointmentId}}</mat-cell>
+    <mat-cell *matCellDef = "let list" >{{list.appointmentId}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "physicianId">
     <mat-header-cell *matHeaderCellDef><h2>Physician ID</h2>  </mat-header-cell>
@@ -43,8 +44,41 @@
     <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef = "displayedColumns" >
-    <mat-row *matRowDef = "let row; columns: displayedColumns"></mat-row>
+    <mat-row *matRowDef = "let row; columns: displayedColumns" (click) = "getClickedRow(row)"></mat-row>
   </mat-header-row>
 
 </mat-table>
 </div>
+
+<h2 style="margin-top: 100px; align-content: center; margin-left: 5%; font-size: 40px;">Patient Details</h2>
+<div *ngIf="showPatientTable; else elseBlock">
+<div class ="table">
+  <mat-table  [dataSource] = "patientSource">
+  <ng-container matColumnDef = "id">
+    <mat-header-cell *matHeaderCellDef><h2>Patient ID</h2></mat-header-cell>
+    <mat-cell *matCellDef = "let list" >{{list.id}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef ="firstName">
+    <mat-header-cell *matHeaderCellDef><h2>First Name </h2></mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.firstName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "lastName">
+    <mat-header-cell *matHeaderCellDef><h2>Last Name</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.lastName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "phone">
+    <mat-header-cell *matHeaderCellDef> <h2>Contact</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.phone}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "emailId">
+    <mat-header-cell *matHeaderCellDef><h2>Email ID</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.emailId}}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef = "patientColumns">
+    <mat-row *matRowDef = "let row; columns: patientColumns"></mat-row>
+  </mat-header-row>
+
+</mat-table>
+</div>
+</div>
+<ng-template #elseBlock><h2 style="width: 100%; background-color: #F5F5F5; text-align: center;" >Please select a appointment to show details</h2></ng-template>
