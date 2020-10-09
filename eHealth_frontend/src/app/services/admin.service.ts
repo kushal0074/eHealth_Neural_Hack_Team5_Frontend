@@ -100,8 +100,8 @@ getAvailableSlots(physicianId: String, date: Date): Observable<Availablity[]>
   return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`)
 }
 
-saveAppointment(appointment : Appointment): Observable<Appointment>{
-  return this.http.post<Appointment>("http://localhost:8085/appointment/set-appointment", appointment);
+saveAppointment(appointment : Appointment, availabilityId: String): Observable<Appointment>{
+  return this.http.post<Appointment>(`http://localhost:8085/appointment/set-appointment/${availabilityId}`, appointment);
 }
 
 }

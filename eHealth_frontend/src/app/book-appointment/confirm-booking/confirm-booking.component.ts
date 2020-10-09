@@ -48,7 +48,7 @@ export class ConfirmBookingComponent implements OnInit {
     this.appointment.date = this.availabilty.date;
     this.appointment.patientId ="000000";
 
-    this.adminSerivce.saveAppointment(this.appointment).subscribe(
+    this.adminSerivce.saveAppointment(this.appointment, this.availabilty.availabilityId).subscribe(
       data => {
         console.log("appointment confirmed!!");
         this.router.navigateByUrl('/bookappointment');

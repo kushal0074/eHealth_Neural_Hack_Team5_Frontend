@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 import { Physician } from 'src/app/classes/physician';
 import { ActivatedRoute } from '@angular/router';
@@ -17,11 +17,9 @@ export class BookAppointmentComponent implements OnInit {
   availableSlots: Availablity[];
   appointment = new Appointment();
   slotSelected: Time;
-  sum: number;
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
-    this.sum = 10;
   }
 
   listPhysicians(event: any){
@@ -50,3 +48,4 @@ export class BookAppointmentComponent implements OnInit {
 
 
 }
+

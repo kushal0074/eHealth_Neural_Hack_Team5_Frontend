@@ -1,0 +1,10 @@
+.content{
+    width: 1024px; margin: 0 auto
+}
+header{
+        background-color: blue;
+}
+
+.card.mb-3{
+    width: 800px;
+}
