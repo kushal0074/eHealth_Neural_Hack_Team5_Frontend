@@ -31,14 +31,11 @@ export class BookAppointmentComponent implements OnInit {
   }
 
   showDateAndSlot(physicianId: String){
-    console.log("physicanshow " + physicianId);
     this.showDateAndTimeSlotFor = physicianId;
-    console.log(this.showDateAndTimeSlotFor);
+    this.availableSlots = [];
   }
 
   getAvailableSlots(physicianId: String){
-    console.log("date : " + this.appointment.date);
-    console.log(physicianId);
     this.adminService.getAvailableSlots(physicianId, this.appointment.date).subscribe(
       data => this.availableSlots = data
     )
