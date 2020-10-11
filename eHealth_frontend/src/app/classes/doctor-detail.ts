@@ -1,5 +1,5 @@
 export class DoctorDetail {
-  emailId: string;
+  email: string;
   firstName: string;
   lastName: string;
   username: string;

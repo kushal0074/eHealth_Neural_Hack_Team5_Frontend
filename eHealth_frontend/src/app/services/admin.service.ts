@@ -31,16 +31,7 @@ export class AdminService {
   {
       let url = this.baseUrl + 'register';
       return this.http.post(url,
-        {
-        firstName : adminDetail.firstName,
-        lastName :  adminDetail.lastName,
-        emailId :  adminDetail.emailId,
-        username  : adminDetail.username,
-        phone : adminDetail.phone,
-        govermentId : adminDetail.govermentId,
-        password : adminDetail.password,
-        roles : 'PATIENT'
-      }, httpOptions);
+       adminDetail, httpOptions);
   }
   login(adminDetail: AdminDetail): Observable<any>
   {
@@ -96,9 +87,9 @@ getAvailableSlots(physicianId: String, date: Date): Observable<Availablity[]>
   console.log("id" + physicianId);
   return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`)
 }
-
-saveAppointment(appointment : Appointment): Observable<Appointment>{
-  return this.http.post<Appointment>("http://localhost:8085/appointment/set-appointment", appointment);
+//
+saveAppointment(appointment : Appointment, availabilityId: String): Observable<Appointment>{
+  return this.http.post<Appointment>(`http://localhost:8085/appointment/set-appointment/${availabilityId}`, appointment);
 }
 
 getPatientById(id: string): Observable<AdminDetail>

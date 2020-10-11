@@ -74,6 +74,9 @@ else{
               {
                 this.router.navigate(['physician-panel', this.tokenService.getToken()]);
               }
+              else if(this.tokenService.getUser().roles == 'PHARMACY'){
+                this.router.navigate(['pharmacy_home', this.tokenService.getToken()]);
+              }
               else {
                 this.router.navigate(['profile', this.tokenService.getToken()]);
             }

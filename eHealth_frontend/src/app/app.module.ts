@@ -1,8 +1,10 @@
+import { PharmacyComponent } from './pharmacy/pharmacy.component';
+import { AddLabComponent } from './hospital-admin/add-lab/add-lab.component';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
 import { ConfirmBookingComponent } from './book-appointment/confirm-booking/confirm-booking.component';
 import { authInterceptorProviders } from './helper/auth-intercepter';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 // import Http module
 import { HttpModule} from '@angular/http';
 // import ReactiveFormsModule for reactive form
@@ -34,6 +36,8 @@ import { PhysicianComponent } from './physician/physician.component';
 import { AppointmentComponent } from './physician/appointment/appointment.component';
 import {MatTableModule} from '@angular/material/table';
 import { RecordComponent } from './physician/record/record.component';
+import { AddPharmacyComponent } from './hospital-admin/add-pharmacy/add-pharmacy.component';
+import { MedicineComponent } from './pharmacy/medicine/medicine.component';
 
 
 @NgModule({
@@ -50,6 +54,9 @@ import { RecordComponent } from './physician/record/record.component';
     PhysicianComponent,
     AppointmentComponent,
     RecordComponent,
+    AddLabComponent,
+    AddPharmacyComponent,
+    MedicineComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +96,7 @@ import { RecordComponent } from './physician/record/record.component';
         component : HospitalAdminComponent
       },
       {
-        path : 'addmember/:adminId',
+        path : 'add-member-physician/:adminId',
         component : AddMemberComponent
       },
       {
@@ -111,6 +118,22 @@ import { RecordComponent } from './physician/record/record.component';
       {
         path : 'patient/confirm-booking/:adminId',
         component : ConfirmBookingComponent
+      },
+      {
+        path : 'add-member-pharmacy/:adminId',
+        component : AddPharmacyComponent
+      },
+      {
+        path : 'add-member-lab/:adminId',
+        component : AddLabComponent
+      },
+      {
+        path : 'pharmacy_home/:adminId',
+        component : PharmacyComponent
+      },
+      {
+        path : 'pharmacy_medicine/:adminId',
+        component : MedicineComponent
       }
     ]),
 
@@ -123,3 +146,17 @@ import { RecordComponent } from './physician/record/record.component';
 })
 export class AppModule {
 }
+
+// @Pipe({name: 'convertFrom24To12Format'})
+// export class TimeFormat implements PipeTransform {
+//      transform(time: any): any {
+//          let hour = (time.split(':'))[0]
+//          let min = (time.split(':'))[1]
+//          let part = hour > 12 ? 'pm' : 'am';
+//          min = (min+'').length == 1 ? `0${min}` : min;
+//          hour = hour > 12 ? hour - 12 : hour;
+//          hour = (hour+'').length == 1 ? `0${hour}` : hour;
+//          return `${hour}:${min} ${part}`
+//        }
+//    }
+

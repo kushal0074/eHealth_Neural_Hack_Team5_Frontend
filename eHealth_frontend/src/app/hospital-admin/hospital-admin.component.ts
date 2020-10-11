@@ -13,11 +13,7 @@ export class HospitalAdminComponent implements OnInit {
   constructor(private adminService : AdminService, private router : Router, private tokenservice : TokenStorageService) { }
 
   ngOnInit(): void {
-    // this.adminService.getAllUsers().subscribe(
-    //   data =>{
-    //   console.log(data);
-    //   }
-    // )
+
     }
 
     routeToAddMember()
@@ -29,5 +25,20 @@ export class HospitalAdminComponent implements OnInit {
     public logout()
     {
       this.adminService.logout();
+    }
+    addMember(event: any)
+    {
+      if(event.target.value == 'Physician')
+      {
+        this.router.navigate(['add-member-physician/' + this.tokenservice.getToken()]);
+      }
+      else if(event.target.value == 'Lab-Admin')
+      {
+        this.router.navigate(['add-member-lab/' + this.tokenservice.getToken()]);
+      }
+      else if(event.target.value == 'Pharmacy-Admin')
+      {
+        this.router.navigate(['add-member-pharmacy/' + this.tokenservice.getToken()]);
+      }
     }
 }

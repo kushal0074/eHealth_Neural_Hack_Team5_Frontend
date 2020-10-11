@@ -2,9 +2,17 @@
   <h1 style="font: bold; font-weight: bold; font-family: 'Courier New', Courier, monospace;
  font-size: 50px; margin-top: 70px; margin-left: 60px; float: left;
 ">EHEALTH ADMIN PANEL</h1>
-<button mat-button (click)='routeToAddMember()' style="background-color: black; text-decoration: solid;
+<!-- <button mat-button (click)='routeToAddMember()' style="background-color: black; text-decoration: solid;
  padding: 10px; color:white; font-family:Verdana, Geneva, Tahoma, sans-serif ; margin: 100px; float: right;margin-right: 100px;
- "> + Add Member</button>
+ "> + Add Member</button> -->
+ <select style="background-color: black; text-decoration: solid;
+ padding: 10px; color:white; font-family:Verdana, Geneva, Tahoma, sans-serif ; margin: 100px; float: right;margin-right: 100px;
+ " class="add-select" name="select-speciality" (click)= addMember($event)>
+  <option selected>Add new member</option>
+  <option value="Physician">Add Physician</option>
+  <option value="Lab-Admin">Add Lab Admin</option>
+  <option value="Pharmacy-Admin">Add Pharmacy Admin</option>
+</select>
 
 </div>
 <button mat-button (click)='logout()' style="background-color: black; text-decoration: solid;

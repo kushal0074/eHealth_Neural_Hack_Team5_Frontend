@@ -8,4 +8,5 @@ export class AdminDetail {
   password: string;
   phone: string;
   govermentId: string;
+  role: string;
 }

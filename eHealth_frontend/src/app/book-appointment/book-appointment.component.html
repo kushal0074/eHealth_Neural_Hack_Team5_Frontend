@@ -1,22 +1,55 @@
-<p>Book an appointment!</p>
-<select name="select-speciality" (click)= listPhysicians($event)>
-    <option >Select Speciality</option>
-    <option value="Pediatrician">Pediatrician</option>
-    <option value="Gynecologist">Gynecologist</option>
-    <option value="Surgeon">Surgeon</option>
-    <option value="Cardiologist">Cardiologist</option>
-    <option value="Dermatologist">Dermatologist</option>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><h2 style="margin-top: 10px; margin-left: 10px;">WELCOME TO EHEALTH  |  PATIENT PANEL</h2></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav" >
+    <ul class="navbar-nav" ml-auto>
+      <li class="nav-item ">
+        <a class="nav-link" href="profile/{{token}}">Home </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="patient/{{token}}">Appointment </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Record</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)= "logout()" href="login">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="content">
+  <h2 style="margin-top: 30px;">To book an appointment please select a speciality</h2>
+<select class="custom-select" name="select-speciality" (click)= listPhysicians($event)>
+  <option selecteds>Select Speciality</option>
+  <option value="Pediatrician">Pediatrician</option>
+  <option value="Gynecologist">Gynecologist</option>
+  <option value="Surgeon">Surgeon</option>
+  <option value="Cardiologist">Cardiologist</option>
+  <option value="Dermatologist">Dermatologist</option>
 </select>
 
-
-<div *ngFor="let physician of physicians">
-    <h3>{{physician.firstName}}</h3>
-    <span> Speciality - {{physician.speciality}}</span>
-    <button (click) = showDateAndSlot(physician.physicianId)>Book Appointment</button>
-    <!-- <div *ngIf="showDateAndTimeSlotFor === physician.physicianId"> -->
-        <!-- <input type="date" name= "date" [(ngModel)]="appointment.date" placeholder="yyyy-MM-dd"> -->
-        <button (click)="getAvailableSlots(physician.physicianId)">Check Available Slots</button>
-        <div *ngFor="let availableSlot of availableSlots" routerLink="confirmBooking/{{physician.physicianId}}/{{availableSlot.availabilityId}}">{{availableSlot.startTime}}</div>
+<div class="card mb-3" style="max-width: 540px;" *ngFor="let physician of physicians">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="../../assets/images/physician_placeholder.jpg" class="card-img" alt="physician">
     </div>
-<!-- </div> -->
-
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title">Dr. {{physician.firstName}} {{physician.lastName}}</h3>
+        <p class="card-text">{{physician.speciality}}</p>
+        <p class="card-text"><small class="text-muted">10 years of Experience</small></p>
+        <button class="btn btn-primary" (click) = showDateAndSlot(physician.physicianId)>Book Appointment</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showDateAndTimeSlotFor">
+    <form (ngSubmit)="getAvailableSlots(physician.physicianId)"  [formGroup]="dateForm">
+      <input type="date" name="date" [(ngModel)]="appointment.date" placeholder="yyyy-MM-dd" formControlName="appointMentDate"/>
+      <button type ="submit">Check Available Slots</button>
+    </form>
+      <div *ngFor="let availableSlot of availableSlots" routerLink="confirmBooking/{{physician.physicianId}}/{{availableSlot.availabilityId}}">{{availableSlot.startTime}}</div>
+  </div>
+</div>

@@ -42,7 +42,7 @@ export class AddMemberComponent implements OnInit {
      {
       this.doctordetail.firstName = this.FirstName.value;
       this.doctordetail.lastName = this.LastName.value;
-      this.doctordetail.emailId = this.Email.value;
+      this.doctordetail.email = this.Email.value;
       this.doctordetail.username = this.UserName.value;
       this.doctordetail.password = this.Password.value;
       this.doctordetail.phone = this.Phone.value;

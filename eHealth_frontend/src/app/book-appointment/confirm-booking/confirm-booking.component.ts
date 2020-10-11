@@ -13,10 +13,10 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./confirm-booking.component.css']
 })
 export class ConfirmBookingComponent implements OnInit {
+  private tokenService = new TokenStorageService();
   physician: Physician = new Physician();
   availabilty: Availablity = new Availablity();
   appointment: Appointment = new Appointment();
-  private tokenStorageService = new TokenStorageService();
 
   constructor(private adminSerivce: AdminService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -48,9 +48,9 @@ export class ConfirmBookingComponent implements OnInit {
     this.appointment.startTime = this.availabilty.startTime;
     this.appointment.endTime = this.availabilty.endTime;
     this.appointment.date = this.availabilty.date;
-    this.appointment.patientId = this.tokenStorageService.getUser().id;
+    this.appointment.patientId = this.tokenService.getUser().id;
 
-    this.adminSerivce.saveAppointment(this.appointment).subscribe(
+    this.adminSerivce.saveAppointment(this.appointment, this.availabilty.availabilityId).subscribe(
       data => {
         console.log("appointment confirmed!!");
         this.router.navigateByUrl('/bookappointment');

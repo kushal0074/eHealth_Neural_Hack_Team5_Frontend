@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AdminDetail } from '../classes/admin-detail';
-import { AdminService } from '../services/admin.service';
+import { AdminDetail } from './../../classes/admin-detail';
 import { Router } from '@angular/router';
-import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
-import { equal } from 'assert';
+import { AdminService } from './../../services/admin.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: 'app-add-lab',
+  templateUrl: './add-lab.component.html',
+  styleUrls: ['./add-lab.component.css']
 })
-export class SignupComponent implements OnInit {
+export class AddLabComponent implements OnInit {
   private adminDetail = new AdminDetail();
   isSuccessful = false;
   isSignUpFailed = false;
@@ -29,6 +28,7 @@ export class SignupComponent implements OnInit {
     confirmPassword : new FormControl('' , Validators.required),
     phone : new FormControl('', Validators.required),
     goverment: new FormControl('', Validators.required)
+
 });
   constructor(private adminService: AdminService, private router: Router) { }
   ngOnInit() {
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
       this.adminDetail.password = this.Password.value;
       this.adminDetail.phone = this.Phone.value;
       this.adminDetail.govermentId = this.GovermentId.value;
-      this.adminDetail.role = 'PATIENT';
+      this.adminDetail.role = 'LABORATORY';
         this.adminService.saveAdminDetails(this.adminDetail).subscribe(
              data => {
               console.log('data '+ data.body);
