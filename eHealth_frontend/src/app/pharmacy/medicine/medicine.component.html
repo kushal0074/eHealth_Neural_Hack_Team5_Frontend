@@ -20,3 +20,33 @@
     </ul>
   </div>
 </nav>
+<!-- <input type ="text" ng-modle="searchBox">
+<h2 style="margin-top: 50px; align-content: center; margin-left: 5%; font-size: 40px;">Appointment Details</h2>
+<div class ="table">
+  <mat-table  [dataSource] = "dataSource | filter : searchBox">
+  <ng-container matColumnDef = "appointmentId">
+    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Appointment ID</h2></mat-header-cell>
+    <mat-cell *matCellDef = "let list" >{{list.appointmentId}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "physicianId">
+    <mat-header-cell *matHeaderCellDef><h2>Physician ID</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.physicianId}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "patientId">
+    <mat-header-cell *matHeaderCellDef> <h2>Patient ID</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.patientId}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "date">
+    <mat-header-cell *matHeaderCellDef> <h2>Date</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.date}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "time">
+    <mat-header-cell *matHeaderCellDef><h2>Time</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef = "displayedColumns" >
+    <mat-row *matRowDef = "let row; columns: displayedColumns" (click) = "getClickedRow(row)"></mat-row>
+  </mat-header-row>
+
+</mat-table>
+</div> -->

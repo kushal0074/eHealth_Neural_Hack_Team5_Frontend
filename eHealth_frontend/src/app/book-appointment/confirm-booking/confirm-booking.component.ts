@@ -53,7 +53,7 @@ export class ConfirmBookingComponent implements OnInit {
     this.adminSerivce.saveAppointment(this.appointment, this.availabilty.availabilityId).subscribe(
       data => {
         console.log("appointment confirmed!!");
-        this.router.navigateByUrl('/bookappointment');
+        this.router.navigateByUrl('patient/'+ this.tokenService.getToken());
       }
     )
   }

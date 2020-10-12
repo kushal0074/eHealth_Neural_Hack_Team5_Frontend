@@ -50,6 +50,6 @@
       <input type="date" name="date" [(ngModel)]="appointment.date" placeholder="yyyy-MM-dd" formControlName="appointMentDate"/>
       <button type ="submit">Check Available Slots</button>
     </form>
-      <div *ngFor="let availableSlot of availableSlots" routerLink="confirmBooking/{{physician.physicianId}}/{{availableSlot.availabilityId}}">{{availableSlot.startTime}}</div>
+      <div *ngFor="let availableSlot of availableSlots" (click) = "moveToconfirmBooking(physician.physicianId,availableSlot.availabilityId)" >{{availableSlot.startTime}}</div>
   </div>
 </div>

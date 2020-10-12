@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { TokenStorageService } from './../services/token-storage.service';
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
@@ -20,7 +21,7 @@ export class BookAppointmentComponent implements OnInit {
   availableSlots: Availablity[];
   appointment = new Appointment();
   slotSelected: Time;
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService,private router: Router) { }
 
 dateForm = new FormGroup({
   appointMentDate : new FormControl('' , Validators.required)
@@ -40,14 +41,15 @@ dateForm = new FormGroup({
   }
 
   showDateAndSlot(physicianId: String){
+
     console.log("physicanshow " + physicianId);
     this.showDateAndTimeSlotFor = true;
     console.log(this.showDateAndTimeSlotFor);
+    this.availableSlots = [];
+
   }
 
-  getAvailableSlots(physicianId: String){
-    console.log("date : " + this.appointment.date);
-    console.log(physicianId);
+  getAvailableSlots(physicianId: string){
     this.adminService.getAvailableSlots(physicianId, this.appointment.date).subscribe(
       data => this.availableSlots = data
     )
@@ -61,5 +63,8 @@ dateForm = new FormGroup({
   public logout()
   {
     this.adminService.logout();
+  }
+  moveToconfirmBooking(physicianId,availiblityId){
+      this.router.navigate(['patient/confirm-booking/'+ physicianId + '/' + availiblityId]);
   }
 }

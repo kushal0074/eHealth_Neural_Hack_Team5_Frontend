@@ -39,9 +39,13 @@
     <mat-header-cell *matHeaderCellDef> <h2>Date</h2> </mat-header-cell>
     <mat-cell *matCellDef = "let list">{{list.date}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef = "time">
-    <mat-header-cell *matHeaderCellDef><h2>Time</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
+  <ng-container matColumnDef = "startTime">
+    <mat-header-cell *matHeaderCellDef><h2>Start Time</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.startTime}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "endTime">
+    <mat-header-cell *matHeaderCellDef><h2>End Time</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.endTime}}</mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef = "displayedColumns" >
     <mat-row *matRowDef = "let row; columns: displayedColumns" (click) = "getClickedRow(row)"></mat-row>
@@ -74,11 +78,42 @@
     <mat-header-cell *matHeaderCellDef><h2>Email ID</h2>  </mat-header-cell>
     <mat-cell *matCellDef = "let list">{{list.emailId}}</mat-cell>
   </ng-container>
+  <ng-container matColumnDef="buttons">
+    <mat-header-cell *matHeaderCellDef><h2>View Record</h2></mat-header-cell>
+    <mat-cell *matCellDef="let element">
+        <button mat-button (click)="viewPatientRecord(element.id)">
+            <mat-icon>launch</mat-icon>
+        </button>
+    </mat-cell>
+</ng-container>
   <mat-header-row *matHeaderRowDef = "patientColumns">
     <mat-row *matRowDef = "let row; columns: patientColumns"></mat-row>
   </mat-header-row>
 
 </mat-table>
+</div>
+<div class="container">
+  <h1>Prescriptions</h1>
+  <form [formGroup] ='formPerscrption' (ngSubmit) ="PhysicianRecord()">
+    <div class="row">
+      <div class="col-75">
+        <input type="text" formControlName ="medicine" placeholder="Enter medicines..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-75">
+        <input type="text" formControlName ="test" placeholder="Enter test..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-75">
+        <textarea id="subject" formControlName ="remarks" placeholder="Remarks/comment.." style="height:200px"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
 </div>
 </div>
 <ng-template #elseBlock><h2 style="width: 100%; background-color: #F5F5F5; text-align: center;" >Please select a appointment to show details</h2></ng-template>

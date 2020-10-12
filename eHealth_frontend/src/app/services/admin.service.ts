@@ -1,3 +1,4 @@
+import { Treatement } from './../classes/treatement';
 import { AppointmentResponse } from './../classes/appointment-response';
 import { DoctorDetail } from './../classes/doctor-detail';
 import { FormGroup } from '@angular/forms';
@@ -76,15 +77,14 @@ getPhysicians(speciality: String) : Observable<Physician[]>
   )
 }
 
-getAvailibilty(availablityId: String): Observable<Availablity>
+getAvailibilty(availablityId: string): Observable<Availablity>
 {
   return this.http.get<Availablity>(`http://localhost:8085/appointment/get-slot/${availablityId}`)
 }
 
-getAvailableSlots(physicianId: String, date: Date): Observable<Availablity[]>
+getAvailableSlots(physicianId: string, date: Date): Observable<Availablity[]>
 {
-  console.log("date" + date);
-  console.log("id" + physicianId);
+
   return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`)
 }
 //
@@ -92,17 +92,28 @@ saveAppointment(appointment : Appointment, availabilityId: String): Observable<A
   return this.http.post<Appointment>(`http://localhost:8085/appointment/set-appointment/${availabilityId}`, appointment);
 }
 
-getPatientById(id: string): Observable<AdminDetail>
+getPatientById(id: string): Observable<any>
 {
-  return this.http.get<GetResponsePatient>(this.baseUrl + 'getPatientById/' + id).pipe(
+  return this.http.get(this.baseUrl + 'user/user-by-id/' + id);
+}
+
+postPatientPrescriptions(treatement: Treatement): Observable<any>
+{
+  return this.http.post(this.baseUrl + 'history/insert-history', treatement);
+}
+
+getAllRecordByPhysicianId(physicianId: string): Observable<Treatement[]>
+{
+  return this.http.get<GetRecord>(this.baseUrl +'history/get-all-records-by-physician-id/' + physicianId).pipe(
     map(response => response.data)
   );
 }
 }
-interface GetResponsePatient
+interface GetRecord
 {
-    data: AdminDetail;
+    data: Treatement[];
 }
+
 
 interface GetResponse
 {

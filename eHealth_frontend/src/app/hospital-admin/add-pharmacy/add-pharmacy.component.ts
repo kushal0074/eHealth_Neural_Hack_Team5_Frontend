@@ -28,6 +28,7 @@ export class AddPharmacyComponent implements OnInit {
     confirmPassword : new FormControl('' , Validators.required),
     phone : new FormControl('', Validators.required),
     goverment: new FormControl('', Validators.required)
+
 });
   constructor(private adminService: AdminService, private router: Router) { }
   ngOnInit() {

@@ -29,6 +29,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from '@angular/material/card';
 import { AdminService } from './services/admin.service';
+import { Time24to12Format } from './time24to12.pipe';
 import { HospitalAdminComponent } from './hospital-admin/hospital-admin.component';
 import { PatientComponent } from './patient/patient.component';
 import { AddMemberComponent } from './hospital-admin/add-member/add-member.component';
@@ -38,7 +39,7 @@ import {MatTableModule} from '@angular/material/table';
 import { RecordComponent } from './physician/record/record.component';
 import { AddPharmacyComponent } from './hospital-admin/add-pharmacy/add-pharmacy.component';
 import { MedicineComponent } from './pharmacy/medicine/medicine.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MedicineComponent } from './pharmacy/medicine/medicine.component';
     RecordComponent,
     AddLabComponent,
     AddPharmacyComponent,
-    MedicineComponent
+    MedicineComponent,
+    Time24to12Format
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,7 @@ import { MedicineComponent } from './pharmacy/medicine/medicine.component';
     MatCheckboxModule,
     MatIconModule,
     BrowserModule,
+    MatGridListModule,
     BrowserAnimationsModule,
     MatTableModule,
 
@@ -116,7 +119,7 @@ import { MedicineComponent } from './pharmacy/medicine/medicine.component';
         component : BookAppointmentComponent
       },
       {
-        path : 'patient/confirm-booking/:adminId',
+        path : 'patient/confirm-booking/:physicianId/:availabilityId',
         component : ConfirmBookingComponent
       },
       {
@@ -146,17 +149,3 @@ import { MedicineComponent } from './pharmacy/medicine/medicine.component';
 })
 export class AppModule {
 }
-
-// @Pipe({name: 'convertFrom24To12Format'})
-// export class TimeFormat implements PipeTransform {
-//      transform(time: any): any {
-//          let hour = (time.split(':'))[0]
-//          let min = (time.split(':'))[1]
-//          let part = hour > 12 ? 'pm' : 'am';
-//          min = (min+'').length == 1 ? `0${min}` : min;
-//          hour = hour > 12 ? hour - 12 : hour;
-//          hour = (hour+'').length == 1 ? `0${hour}` : hour;
-//          return `${hour}:${min} ${part}`
-//        }
-//    }
-
