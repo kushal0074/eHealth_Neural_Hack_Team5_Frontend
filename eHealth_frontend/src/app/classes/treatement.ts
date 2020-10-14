@@ -12,7 +12,7 @@ export class Treatement {
   status: boolean;
   medicines: string;
   test: string;
-  remarks: string;
+  prescription: string;
 }
 
 

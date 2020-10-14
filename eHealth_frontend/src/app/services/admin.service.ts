@@ -1,3 +1,4 @@
+import { PharmacyCurrentRecord } from './../classes/pharmacy-current-record';
 import { Treatement } from './../classes/treatement';
 import { AppointmentResponse } from './../classes/appointment-response';
 import { DoctorDetail } from './../classes/doctor-detail';
@@ -30,7 +31,7 @@ export class AdminService {
   constructor(private http: HttpClient, private router: Router) { }
   saveAdminDetails(adminDetail: AdminDetail): Observable<any>
   {
-      let url = this.baseUrl + 'register';
+      const url = this.baseUrl + 'register';
       return this.http.post(url,
        adminDetail, httpOptions);
   }
@@ -50,7 +51,7 @@ getAllUsers(): Observable<any>
     return this.http.get(this.baseUrl + 'admin/getAllUsers', httpOptions);
 }
 
-addDoctor(doctordetail : DoctorDetail): Observable<any>
+addDoctor(doctordetail: DoctorDetail): Observable<any>
 {
   return this.http.post(this.baseUrl + 'addPhysician', doctordetail, httpOptions);
 }
@@ -58,43 +59,50 @@ addDoctor(doctordetail : DoctorDetail): Observable<any>
 // physician service
 getAppointmentById(id: string): Observable<AppointmentResponse[]>
 {
-  return this.http.get<GetResponse>(this.baseUrl + 'appointment/get-appointment/'+ id).pipe(
+  return this.http.get<GetResponse>(this.baseUrl + 'appointment/get-appointment/' + id).pipe(
     map(response => response.data)
   );
 }
-getPhysician(physicianId : String) : Observable<Physician>
+getPhysician(physicianId: String): Observable<Physician>
 {
   return this.http.get<Physician>(`http://localhost:8085/appointment/get-physician/${physicianId}`).pipe(
     map(response => response)
   );
 }
 
-getPhysicians(speciality: String) : Observable<Physician[]>
+getPhysicians(speciality: String): Observable<Physician[]>
 {
 
   return this.http.get<Physician[]>(`http://localhost:8085/appointment/get-physicians/${speciality}`).pipe(
     map(response => response)
-  )
+  );
 }
 
 getAvailibilty(availablityId: string): Observable<Availablity>
 {
-  return this.http.get<Availablity>(`http://localhost:8085/appointment/get-slot/${availablityId}`)
+  return this.http.get<Availablity>(`http://localhost:8085/appointment/get-slot/${availablityId}`);
 }
 
 getAvailableSlots(physicianId: string, date: Date): Observable<Availablity[]>
 {
 
-  return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`)
+  return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`);
 }
 //
-saveAppointment(appointment : Appointment, availabilityId: String): Observable<Appointment>{
+saveAppointment(appointment: Appointment, availabilityId: String): Observable<Appointment>{
   return this.http.post<Appointment>(`http://localhost:8085/appointment/set-appointment/${availabilityId}`, appointment);
 }
 
 getPatientById(id: string): Observable<any>
 {
   return this.http.get(this.baseUrl + 'user/user-by-id/' + id);
+}
+
+getAllrecordsBtPatient(patientId):Observable<Treatement[]>
+{
+  return this.http.get<GetRecord>(this.baseUrl + 'history/get-all-records-by-patient-id/' + patientId).pipe(
+    map(response => response.data)
+  );
 }
 
 postPatientPrescriptions(treatement: Treatement): Observable<any>
@@ -104,15 +112,37 @@ postPatientPrescriptions(treatement: Treatement): Observable<any>
 
 getAllRecordByPhysicianId(physicianId: string): Observable<Treatement[]>
 {
-  return this.http.get<GetRecord>(this.baseUrl +'history/get-all-records-by-physician-id/' + physicianId).pipe(
+  return this.http.get<GetRecord>(this.baseUrl + 'history/get-all-records-by-physician-id/' + physicianId).pipe(
     map(response => response.data)
   );
 }
+
+deleteAppointmentById(appointmentId)
+{
+  console.log('called delete ' + appointmentId);
+  return this.http.get(this.baseUrl + 'appointment/delete-appointment/' + appointmentId, httpOptions);
 }
+
+
+// Pharmacy
+getAllRecords():Observable<PharmacyCurrentRecord[]>
+{
+  return this.http.get<GetPharmacyRecord>(this.baseUrl +'pharmacy/get-all-records', httpOptions).pipe(
+    map(response => response.data)
+  );
+}
+
+}
+interface GetPharmacyRecord
+{
+    data: PharmacyCurrentRecord[];
+}
+
 interface GetRecord
 {
     data: Treatement[];
 }
+
 
 
 interface GetResponse

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Time } from '@angular/common';
 import { Treatement } from './../../classes/treatement';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
@@ -15,14 +16,16 @@ import {formatDate} from '@angular/common';
 export class AppointmentComponent implements OnInit {
   private treatement = new Treatement();
   patientId: string;
+  currentAppointmentId: string;
   showPatientTable = false;
   public patientSource: AdminDetail;
   public dataSource: AppointmentResponse[];
   private tokenService = new TokenStorageService();
   public token = this.tokenService.getToken();
-  constructor(private adminService : AdminService) { }
+
+  constructor(private adminService : AdminService,private router: Router) { }
+
   displayedColumns: string[] = ['appointmentId', 'physicianId', 'patientId', 'date','startTime','endTime'];
-  patientColumns: string[] = ['id', 'firstName', 'lastName', 'phone', 'emailId','buttons'];
   ngOnInit(): void {
     console.log('appointment id ' + this.tokenService.getUser().id);
     this.adminService.getAppointmentById(this.tokenService.getUser().id).subscribe(
@@ -44,7 +47,7 @@ PhysicianRecord()
 
   this.treatement.medicines = this.Medicine.value;
   this.treatement.test = this.Test.value;
-  this.treatement.remarks = this.Remarks.value;
+  this.treatement.prescription = this.Remarks.value;
   this.treatement.patientId = this.patientId;
   this.treatement.physicianId = this.tokenService.getUser().id;
   this.treatement.date = this.CurrentDate;
@@ -56,6 +59,12 @@ PhysicianRecord()
       if(data.status == 1)
       {
         alert('Submitted successfully');
+        this.adminService.deleteAppointmentById(this.currentAppointmentId).subscribe(
+          data=>{
+            console.log(data);
+          }
+        )
+        window.location.reload();
       }
     }
   );
@@ -68,14 +77,13 @@ PhysicianRecord()
   getClickedRow(row)
   {
     this.patientId = row.patientId;
+    this.currentAppointmentId = row.appointmentId;
     this.adminService.getPatientById(row.patientId).subscribe(
       data =>{
         this.showPatientTable = true;
-        this.patientSource.firstName = data.data.firstName + '';
-        this.patientSource.lastName = data.data.lastName+'';
-        this.patientSource.id = data.data.Id+'';
-        this.patientSource.emailId = data.data.email+'';
-        this.patientSource.phone = data.data.phone+'';
+        console.log('firstName '+ data.data.firstName);
+        this.patientSource = data.data;
+        console.log(this.patientSource.firstName);
       }
     )
   }

@@ -12,29 +12,33 @@
         <a class="nav-link" href="pharmacy_medicine/{{token}}">Medicine</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Record</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" (click)= "logout()" href="login">Logout</a>
       </li>
     </ul>
   </div>
 </nav>
-<!-- <input type ="text" ng-modle="searchBox">
-<h2 style="margin-top: 50px; align-content: center; margin-left: 5%; font-size: 40px;">Appointment Details</h2>
+<h2 style="margin-top: 50px; align-content: center; margin-left: 5%; font-size: 40px;">Records</h2>
 <div class ="table">
-  <mat-table  [dataSource] = "dataSource | filter : searchBox">
-  <ng-container matColumnDef = "appointmentId">
-    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Appointment ID</h2></mat-header-cell>
-    <mat-cell *matCellDef = "let list" >{{list.appointmentId}}</mat-cell>
+  <mat-table  [dataSource] = "pharmacyCurrentRecord">
+  <ng-container matColumnDef = "id">
+    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Pharmacy ID</h2></mat-header-cell>
+    <mat-cell *matCellDef = "let list" >{{list.id}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "patient">
+    <mat-header-cell *matHeaderCellDef><h2>Patient ID</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.patientId}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "physicianId">
-    <mat-header-cell *matHeaderCellDef><h2>Physician ID</h2>  </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> <h2>Physician ID</h2> </mat-header-cell>
     <mat-cell *matCellDef = "let list">{{list.physicianId}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef = "patientId">
-    <mat-header-cell *matHeaderCellDef> <h2>Patient ID</h2> </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.patientId}}</mat-cell>
+  <ng-container matColumnDef = "medicines">
+    <mat-header-cell *matHeaderCellDef> <h2>Medicines</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.medicine}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "prescription">
+    <mat-header-cell *matHeaderCellDef> <h2>Prescription</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.prescription}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "date">
     <mat-header-cell *matHeaderCellDef> <h2>Date</h2> </mat-header-cell>
@@ -44,9 +48,44 @@
     <mat-header-cell *matHeaderCellDef><h2>Time</h2>  </mat-header-cell>
     <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
   </ng-container>
-  <mat-header-row *matHeaderRowDef = "displayedColumns" >
-    <mat-row *matRowDef = "let row; columns: displayedColumns" (click) = "getClickedRow(row)"></mat-row>
+  <mat-header-row *matHeaderRowDef = "pharmacyRecordColumns" >
+    <mat-row *matRowDef = "let row; columns: pharmacyRecordColumns" (click) = "getClickedRow(row)"></mat-row>
   </mat-header-row>
 
 </mat-table>
-</div> -->
+</div>
+<div *ngIf="showRecord" else elseBlock>
+<div class="card mb-3"  style="max-width: 640px; margin-top: 50px; margin-left: 90px;  background-color: red; float:left">
+  <div class="row no-gutters">
+    <div class="col-md-4" style="align-items: center; padding-left: 20px; padding-top: 20px;padding-bottom: 10px;">
+      <img src="/../assets/images/profile-user.png"   width="100" heigth = "150" alt="Patient">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+      <h2 class="card-title"><mat-icon >perm_identity</mat-icon>  Mr. {{patientDetails.firstName}} {{patientDetails.lastName}}</h2>
+        <h2 class="card-text"><mat-icon >perm_identity</mat-icon> {{patientDetails.username}}</h2>
+      <h2 class="card-text">  <mat-icon >phone </mat-icon>  {{patientDetails.phone}}</h2>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<div  style="width: 600px; float: right; background-color:rgb(206, 203, 203);margin-top: 50px; margin-right: 130px; padding: 15px;">
+  <table  width="100%">
+    <tr>
+      <th>Medicine Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let item of medicineSplitted">
+      <td>{{item}}</td>
+      <td></td>
+      <td></td>
+
+    </tr>
+  </table>
+
+</div>
+</div>
+

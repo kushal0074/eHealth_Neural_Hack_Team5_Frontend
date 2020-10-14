@@ -8,14 +8,14 @@
       <li class="nav-item ">
         <a class="nav-link" href="profile/{{token}}">Home </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link"  href="patient/{{token}}">Appointment</a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="patient/{{token}}">Appointment </a>
+        <a class="nav-link" href="patient/record/{{token}}">Record <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Record</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)= "logout()" href="login">Logout</a>
+        <a class="nav-link" (click)= "logout()" href="login"  >Logout</a>
       </li>
     </ul>
   </div>

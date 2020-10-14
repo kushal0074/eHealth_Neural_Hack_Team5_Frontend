@@ -57,31 +57,60 @@
 <h2 style="margin-top: 100px; align-content: center; margin-left: 5%; font-size: 40px;">Patient Details</h2>
 <div *ngIf="showPatientTable; else elseBlock">
 <div class ="table">
-  <mat-table  [dataSource] = "patientSource">
+  <table style = "border: 1;" width = "100%">
+
+    <tr>
+       <td>
+          <table style = "border: 1;" width = "100%">
+             <tr>
+                <th><h2>Patient ID</h2></th>
+                <th><h2>First Name </h2></th>
+                <th><h2>Last Name</h2></th>
+               <th> <h2>Email ID</h2></th>
+                <th><h2>Contact</h2></th>
+                <th><h2>View Record</h2></th>
+             </tr>
+             <tr>
+              <td>{{patientSource.id}}</td>
+                <td>{{patientSource.firstName}}</td>
+                <td>{{patientSource.lastName}}</td>
+                <td>{{patientSource.emailId}}</td>
+                <td>{{patientSource.phone}}</td>
+                <td><button mat-button (click)="viewPatientRecord(patientSource.id)">
+                  <mat-icon>launch</mat-icon>
+              </button></td>
+             </tr>
+
+          </table>
+       </td>
+    </tr>
+
+ </table>
+  <!-- <mat-table>
   <ng-container matColumnDef = "id">
     <mat-header-cell *matHeaderCellDef><h2>Patient ID</h2></mat-header-cell>
-    <mat-cell *matCellDef = "let list" >{{list.id}}</mat-cell>
+    <mat-cell  >{{patientSource.id}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef ="firstName">
     <mat-header-cell *matHeaderCellDef><h2>First Name </h2></mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.firstName}}</mat-cell>
+    <mat-cell>{{patientSource.firstName}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "lastName">
     <mat-header-cell *matHeaderCellDef><h2>Last Name</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.lastName}}</mat-cell>
+    <mat-cell >{{patientSource.lastName}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "phone">
     <mat-header-cell *matHeaderCellDef> <h2>Contact</h2> </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.phone}}</mat-cell>
+    <mat-cell >{{patientSource.phone}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "emailId">
     <mat-header-cell *matHeaderCellDef><h2>Email ID</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.emailId}}</mat-cell>
+    <mat-cell>{{patientSource.emailId}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="buttons">
     <mat-header-cell *matHeaderCellDef><h2>View Record</h2></mat-header-cell>
-    <mat-cell *matCellDef="let element">
-        <button mat-button (click)="viewPatientRecord(element.id)">
+    <mat-cell >
+        <button mat-button (click)="viewPatientRecord(patientSource.id)">
             <mat-icon>launch</mat-icon>
         </button>
     </mat-cell>
@@ -90,7 +119,7 @@
     <mat-row *matRowDef = "let row; columns: patientColumns"></mat-row>
   </mat-header-row>
 
-</mat-table>
+</mat-table> -->
 </div>
 <div class="container">
   <h1>Prescriptions</h1>

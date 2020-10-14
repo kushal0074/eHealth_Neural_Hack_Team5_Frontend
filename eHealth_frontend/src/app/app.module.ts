@@ -40,6 +40,7 @@ import { RecordComponent } from './physician/record/record.component';
 import { AddPharmacyComponent } from './hospital-admin/add-pharmacy/add-pharmacy.component';
 import { MedicineComponent } from './pharmacy/medicine/medicine.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { PatientRecordComponent } from './profile/patient-record/patient-record.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AddLabComponent,
     AddPharmacyComponent,
     MedicineComponent,
-    Time24to12Format
+    Time24to12Format,
+    PatientRecordComponent
   ],
   imports: [
     BrowserModule,
@@ -117,6 +119,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
       {
         path : 'patient/:adminId',
         component : BookAppointmentComponent
+      },
+      {
+        path : 'patient/record/:adminId',
+        component : PatientRecordComponent
       },
       {
         path : 'patient/confirm-booking/:physicianId/:availabilityId',
