@@ -13,6 +13,7 @@ export class Treatement {
   medicines: string;
   test: string;
   prescription: string;
+  payment: string;
 }
 
 

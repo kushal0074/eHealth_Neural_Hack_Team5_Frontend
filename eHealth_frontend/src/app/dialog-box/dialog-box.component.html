@@ -1,0 +1,26 @@
+<!-- <h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+  <mat-form-field *ngIf="action != 'Delete';">
+    <form   [formGroup]="FormTestName">
+    <input placeholder="{{action}} Name" matInput formControlName="testName">
+  </form>
+</mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+  </div> -->
+<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+  <mat-form-field [formGroup] = "testFormGroup"  novalidate  *ngIf="action != 'Delete'; else elseTemplate">
+    <input formControlName="username" [(ngModel)]="local_data.name"  placeholder="{{action}} Name" matInput>
+  </mat-form-field>
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.name}}</b>?
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
+

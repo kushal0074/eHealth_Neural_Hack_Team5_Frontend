@@ -46,6 +46,9 @@ import { AddTestResultsComponent } from './laboratory/pending-tests/add-test-res
 import { DatePipe } from '@angular/common';
 import { PendingTestsComponent } from './laboratory/pending-tests/pending-tests.component';
 
+import { BillingComponent } from './hospital-admin/billing/billing.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 
 
 @NgModule({
@@ -69,7 +72,9 @@ import { PendingTestsComponent } from './laboratory/pending-tests/pending-tests.
     PatientRecordComponent,
     LaboratoryComponent,
     AddTestResultsComponent,
-    PendingTestsComponent
+    PendingTestsComponent,
+    BillingComponent,
+    DialogBoxComponent
   ],
   imports: [
     FormsModule,
@@ -88,7 +93,7 @@ import { PendingTestsComponent } from './laboratory/pending-tests/pending-tests.
     MatGridListModule,
     BrowserAnimationsModule,
     MatTableModule,
-
+    ScrollingModule,
     RouterModule.forRoot([
       {
         path : '',
@@ -191,6 +196,10 @@ import { PendingTestsComponent } from './laboratory/pending-tests/pending-tests.
             ]
           }
         ]
+      },
+      {
+        path : 'hospital-admin/billing-panel/:adminId',
+        component : BillingComponent
       }
     ]),
 

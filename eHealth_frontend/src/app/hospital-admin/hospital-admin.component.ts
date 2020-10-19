@@ -9,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hospital-admin.component.css']
 })
 export class HospitalAdminComponent implements OnInit {
-
-  constructor(private adminService : AdminService, private router : Router, private tokenservice : TokenStorageService) { }
+  private tokenService = new TokenStorageService();
+  token = this.tokenService.getToken();
+  constructor(private adminService : AdminService, private router : Router) { }
 
   ngOnInit(): void {
 
@@ -19,26 +20,28 @@ export class HospitalAdminComponent implements OnInit {
     routeToAddMember()
     {
 
-      this.router.navigate(['addmember', this.tokenservice.getToken()]);
+      this.router.navigate(['addmember', this.tokenService.getToken()]);
     }
 
-    public logout()
-    {
-      this.adminService.logout();
-    }
     addMember(event: any)
     {
       if(event.target.value == 'Physician')
       {
-        this.router.navigate(['add-member-physician/' + this.tokenservice.getToken()]);
+        this.router.navigate(['add-member-physician/' + this.tokenService.getToken()]);
       }
       else if(event.target.value == 'Lab-Admin')
       {
-        this.router.navigate(['add-member-lab/' + this.tokenservice.getToken()]);
+        this.router.navigate(['add-member-lab/' + this.tokenService.getToken()]);
       }
       else if(event.target.value == 'Pharmacy-Admin')
       {
-        this.router.navigate(['add-member-pharmacy/' + this.tokenservice.getToken()]);
+        this.router.navigate(['add-member-pharmacy/' + this.tokenService.getToken()]);
       }
+    }
+    public logout()
+    {
+
+      this.adminService.logout();
+
     }
 }

@@ -1,3 +1,5 @@
+import { PharmacyCurrentRecord } from './../../classes/pharmacy-current-record';
+import { Labrecord } from './../../classes/labrecord';
 import { Router } from '@angular/router';
 import { Time } from '@angular/common';
 import { Treatement } from './../../classes/treatement';
@@ -16,6 +18,9 @@ import {formatDate} from '@angular/common';
 export class AppointmentComponent implements OnInit {
   private treatement = new Treatement();
   patientId: string;
+
+  private labrecord = new Labrecord();
+  private phrecord = new PharmacyCurrentRecord();
   currentAppointmentId: string;
   showPatientTable = false;
   public patientSource: AdminDetail;
@@ -53,17 +58,49 @@ PhysicianRecord()
   this.treatement.date = this.CurrentDate;
   this.treatement.time = this.CurrentTime;
 
+  //lab
+  this.labrecord.date = this.CurrentDate;
+  this.labrecord.time = this.CurrentTime;
+  this.labrecord.patientId = this.patientId;
+  this.labrecord.physicianId = this.patientId;
+  this.labrecord.testName = this.Test.value;
+
+  this.phrecord.date = this.CurrentDate;
+  this.phrecord.time = this.CurrentTime;
+  this.phrecord.patientId = this.patientId;
+  this.phrecord.physicianId = this.patientId;
+  this.phrecord.medicine = this.Medicine.value;
+  this.phrecord.prescription = this.Remarks.value;
+
 
   this.adminService.postPatientPrescriptions(this.treatement).subscribe(
     data => {
       if(data.status == 1)
       {
         alert('Submitted successfully');
+        console.log('TID......' + data.data.treatmentId);
+        this.labrecord.treatmentId = data.data.treatmentId;
+        this.phrecord.treatmentId = data.data.treatmentId;
+        this.adminService.saveTreatementInLab(this.labrecord).subscribe(
+        data =>
+        {
+           console.log('lab'+data);
+        }
+        );
+        this.adminService.saveTreatementInPharmacy(this.phrecord).subscribe(
+        data =>
+        {
+          console.log('ph'+data);
+        }
+        );
+
+
         this.adminService.deleteAppointmentById(this.currentAppointmentId).subscribe(
-          data=>{
+          data =>
+          {
             console.log(data);
           }
-        )
+        );
         window.location.reload();
       }
     }

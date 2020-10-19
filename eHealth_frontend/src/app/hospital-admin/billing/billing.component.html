@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><h2 style="margin-top: 10px; margin-left: 10px;">WELCOME TO EHEALTH  |  PHARMACY PANEL</h2></a>
+  <a class="navbar-brand" href="#"><h2 style="margin-top: 10px; margin-left: 10px;">WELCOME TO EHEALTH |  ADMIN  PANEL</h2></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav" >
     <ul class="navbar-nav" ml-auto>
-      <li class="nav-item  ">
-        <a class="nav-link" href="pharmacy_home/{{token}}">Home </a>
+      <li class="nav-item ">
+        <a class="nav-link" href="hospital-admin/{{token}}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="pharmacy_medicine/{{token}}">Medicine</a>
+        <a class="nav-link" href="hospital-admin/billing-panel/{{ token }}">Billing</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)= "logout()" href="login">Logout</a>
@@ -21,8 +21,8 @@
 <div class ="table">
   <mat-table  [dataSource] = "pharmacyCurrentRecord">
   <ng-container matColumnDef = "id">
-    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Pharmacy ID</h2></mat-header-cell>
-    <mat-cell *matCellDef = "let list" >{{list.id}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Treatment ID</h2></mat-header-cell>
+    <mat-cell *matCellDef = "let list" >{{list.treatmentId}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "patient">
     <mat-header-cell *matHeaderCellDef><h2>Patient ID</h2>  </mat-header-cell>
@@ -34,11 +34,15 @@
   </ng-container>
   <ng-container matColumnDef = "medicines">
     <mat-header-cell *matHeaderCellDef> <h2>Medicines</h2> </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.medicine}}</mat-cell>
+    <mat-cell *matCellDef = "let list">{{list.medicines}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "prescription">
     <mat-header-cell *matHeaderCellDef> <h2>Prescription</h2> </mat-header-cell>
     <mat-cell *matCellDef = "let list">{{list.prescription}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "test">
+    <mat-header-cell *matHeaderCellDef> <h2>Test</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.test}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef = "date">
     <mat-header-cell *matHeaderCellDef> <h2>Date</h2> </mat-header-cell>
@@ -51,11 +55,12 @@
   <mat-header-row *matHeaderRowDef = "pharmacyRecordColumns" >
     <mat-row *matRowDef = "let row; columns: pharmacyRecordColumns" (click) = "getClickedRow(row)"></mat-row>
   </mat-header-row>
-
 </mat-table>
+<!-- <div *ngIf="pharmacyCurrentRecord.length === 0"><h2 style="text-align:center; background-color: rgb(216, 212, 212); margin-top:50px">Greate No Pending Work...</h2></div> -->
+
 </div>
 <div *ngIf="showRecord" else elseBlock>
-<div class="card mb-3"  style="max-width: 640px; margin-top: 50px; margin-left: 90px;  background-color: rgb(235, 221, 221); float:left">
+<div class="card mb-3"  style="max-width: 640px; margin-top: 50px; margin-left: 90px;  background-color: rgb(209, 177, 177); float:left">
   <div class="row no-gutters">
     <div class="col-md-4" style="align-items: center; padding-left: 20px; padding-top: 20px;padding-bottom: 10px;">
       <img src="/../assets/images/profile-user.png"   width="100" heigth = "150" alt="Patient">
@@ -71,25 +76,27 @@
 
 
 </div>
-<div  style="width: 600px; float: right; background-color:rgb(235, 221, 221);margin-top: 50px; margin-right: 130px; padding: 15px;">
+<div  style="width: 600px; float: right; background-color:rgb(206, 203, 203);margin-top: 50px; margin-right: 130px; padding: 15px;">
   <h1 style="font-weight: 500; text-align: center;">Generate Bill</h1>
 
 
-  <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Medicine</button>
+  <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Test</button>
 
-  <mat-table [dataSource]="medicineDatasource" #billTable style="margin-top: 30px;" class="my-table mat-elevation-z8">
+  <mat-table [dataSource]="testRecord" #billTable style="margin-top: 30px;" class="my-table mat-elevation-z8">
 
 
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef><h2>Medicine Name</h2></mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    <ng-container matColumnDef="testname">
+      <mat-header-cell *matHeaderCellDef><h2>Test Name</h2></mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.testname}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container  matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef style="display: flex;padding: 21px 10; justify-content: flex-end;"><h2 >Price</h2>  </mat-header-cell>
-      <mat-cell *matCellDef="let element" style="display: flex;padding: 21px 10; justify-content: flex-end;"> {{element.price}} </mat-cell>
-  </ng-container>
+    <ng-container style="text-align: right;" matColumnDef="testprice">
+      <mat-header-cell *matHeaderCellDef style="text-align: right;"><h2>Price</h2>  </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="text-align: right;"> {{element.testprice}} </mat-cell>
+    </ng-container>
+
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
