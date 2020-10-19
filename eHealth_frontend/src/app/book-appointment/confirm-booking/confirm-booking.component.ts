@@ -1,6 +1,7 @@
 import { TokenStorageService } from './../../services/token-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EmailDetails } from 'src/app/classes/email-details';
 import { Appointment } from '../../classes/appointment';
 import { Availablity } from '../../classes/availablity';
 import { Physician } from '../../classes/physician';
@@ -17,7 +18,8 @@ export class ConfirmBookingComponent implements OnInit {
   physician: Physician = new Physician();
   availabilty: Availablity = new Availablity();
   appointment: Appointment = new Appointment();
-
+  emailDetails: EmailDetails = new EmailDetails();
+  
   constructor(private adminSerivce: AdminService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
 
@@ -56,6 +58,25 @@ export class ConfirmBookingComponent implements OnInit {
         this.router.navigateByUrl('patient/'+ this.tokenService.getToken());
       }
     )
+  }
+
+  sendEmail(){
+    this.emailDetails.appointmentId = this.appointment.appointmentId;
+    this.emailDetails.patientName = "John";
+    this.emailDetails.physicianName = this.physician.firstName + " " + this.physician.lastName;
+    this.emailDetails.date = this.appointment.date;
+    this.emailDetails.time = this.appointment.startTime;
+    this.emailDetails.patientEmail = "gautambhatiani.1999@gmail.com";
+    this.adminSerivce.sendEmail(this.emailDetails).subscribe(
+      data => {
+        console.log("Email Sent!!");
+      }
+    )
+  }
+
+  confirmAppointment(){
+    this.saveAppointment();
+    this.sendEmail();
   }
 
 }

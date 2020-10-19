@@ -17,6 +17,10 @@ import { Router } from '@angular/router';
 import { Availablity } from '../classes/availablity';
 import { Appointment } from '../classes/appointment';
 import { Physician } from '../classes/physician';
+import { LabRecord } from '../classes/lab-record';
+import { LabRecordPast } from '../classes/lab-record-past';
+import { Time } from '@angular/common';
+import { EmailDetails } from '../classes/email-details';
 
 
 const httpOptions = {
@@ -88,6 +92,7 @@ getAvailibilty(availablityId: string): Observable<Availablity>
 
 getAvailableSlots(physicianId: string, date: Date): Observable<Availablity[]>
 {
+  
 
   return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`);
 }
@@ -120,6 +125,29 @@ getAllrecordsBtPatient(patientId):Observable<Treatement[]>
     map(response => response.data)
   );
 }
+
+
+sendEmail(emailDetails: EmailDetails): Observable<EmailDetails>{
+  return this.http.post<EmailDetails>(`http://localhost:8084//send/Email`, emailDetails);
+}
+getTestRecord(testId: String): Observable<LabRecord>
+{
+  return this.http.get<GetLabRecord>(`http://localhost:8090/laboratory/get-labrecord/${testId}`).pipe(
+    map(response => response.data)
+  )
+}
+
+getAllTestRecords(): Observable<LabRecord[]>{
+  return this.http.get<GetTestRecords>(`http://localhost:8090/laboratory/get-labrecords-all`).pipe(
+    map(response => response.data)
+  );
+}
+saveTestRecordPast(labRecordPast : LabRecordPast, testId : String) : Observable<LabRecordPast>{
+  return this.http.post<GetTestRecordPast>(`http://localhost:8090/laboratory/add-past-testrecord/${testId}`, labRecordPast).pipe(
+    map(response => response.data)
+  );
+}
+
 
 postPatientPrescriptions(treatement: Treatement): Observable<any>
 {
@@ -205,6 +233,20 @@ interface GetTestRecord
 interface GetMedcineRecord
 {
   data: Medicinerecord;
+}
+
+interface GetTestRecordPast
+{
+  data : LabRecordPast
+}
+interface GetLabRecord
+{
+  data : LabRecord
+}
+
+interface GetTestRecords
+{
+  data : LabRecord[];
 }
 interface GetPharmacyRecord
 {

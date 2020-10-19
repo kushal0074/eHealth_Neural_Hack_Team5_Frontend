@@ -4,11 +4,11 @@ import { BookAppointmentComponent } from './book-appointment/book-appointment.co
 import { ConfirmBookingComponent } from './book-appointment/confirm-booking/confirm-booking.component';
 import { authInterceptorProviders } from './helper/auth-intercepter';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { Component, NgModule, Pipe, PipeTransform } from '@angular/core';
 // import Http module
 import { HttpModule} from '@angular/http';
 // import ReactiveFormsModule for reactive form
-import { ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 // import module for Routing.
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -41,6 +41,11 @@ import { AddPharmacyComponent } from './hospital-admin/add-pharmacy/add-pharmacy
 import { MedicineComponent } from './pharmacy/medicine/medicine.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { PatientRecordComponent } from './profile/patient-record/patient-record.component';
+import { LaboratoryComponent } from './laboratory/laboratory.component';
+import { AddTestResultsComponent } from './laboratory/pending-tests/add-test-results/add-test-results.component';
+import { DatePipe } from '@angular/common';
+import { PendingTestsComponent } from './laboratory/pending-tests/pending-tests.component';
+
 import { BillingComponent } from './hospital-admin/billing/billing.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
@@ -65,10 +70,14 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
     MedicineComponent,
     Time24to12Format,
     PatientRecordComponent,
+    LaboratoryComponent,
+    AddTestResultsComponent,
+    PendingTestsComponent,
     BillingComponent,
     DialogBoxComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -151,6 +160,44 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
         component : MedicineComponent
       },
       {
+        
+        path : 'bookappointment',
+        
+        children : [
+          {
+            path: "",
+            component: BookAppointmentComponent
+          },
+          {
+            path: 'confirmBooking/:physicianId/:availabilityId',
+            component : ConfirmBookingComponent,
+          }  
+        ]
+      },
+      {
+        path: 'laboratory-panel',
+
+        children:[
+          {
+            path: "",
+            component: LaboratoryComponent
+          },
+          {
+            path: "viewPendingTests",
+            children:[
+              {
+                path: "",
+                component: PendingTestsComponent
+              },
+              {
+                path: "addTestResults/:testId/for/:patientId/by/:physicianId",
+                component : AddTestResultsComponent
+              }
+            ]
+          }
+        ]
+      },
+      {
         path : 'hospital-admin/billing-panel/:adminId',
         component : BillingComponent
       }
@@ -159,7 +206,7 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
     BrowserAnimationsModule
   ],
   providers: [
-    AdminService, authInterceptorProviders
+    AdminService, authInterceptorProviders, DatePipe
   ],
   bootstrap: [AppComponent]
 })
