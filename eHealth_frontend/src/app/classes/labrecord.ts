@@ -1,6 +1,6 @@
 import { Time } from '@angular/common';
 export class Labrecord {
-  id: string;
+  testId: string;
   treatmentId: string;
   patientId: string;
   physicianId: string;

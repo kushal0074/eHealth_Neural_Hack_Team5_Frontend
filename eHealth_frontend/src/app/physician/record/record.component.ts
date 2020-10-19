@@ -42,14 +42,19 @@ export class RecordComponent implements OnInit {
       }
     )
   }
-  ViewRecord(patientId, physicianId)
+  ViewRecord(patientId, physicianId,treatmentId)
   {
+    console.log(treatmentId);
     this.showRecord = true;
     this.adminService.getPatientById(patientId).subscribe(
       data => {
           this.patientDetails = data.data;
       }
     );
-
+    this.adminService.getLabTestRecords(treatmentId).subscribe(
+      data => {
+          console.log(data);
+        }
+      );
   }
 }

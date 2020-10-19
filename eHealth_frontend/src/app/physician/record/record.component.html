@@ -75,7 +75,7 @@
 <!-- </div> -->
 <!-- side section -->
 
-<div class="main-content">
+<div class="main-content" >
   <div class="section-content section-content-p30">
     <div class="container">
       <div class="row" *ngFor="let item of patientRecordList">
@@ -85,7 +85,7 @@
 
             </a>
             <div class="price" >Date : {{item.date}}</div>
-            <button (click) = "ViewRecord(item.patientId,item.physicianId)" class="primary-btn">View Record</button>
+            <button (click) = "ViewRecord(item.patientId,item.physicianId,item.treatmentId)" class="primary-btn">View Record</button>
           </div>
         </div>
       </div>
@@ -113,24 +113,24 @@
   </div>
 </div> -->
 <div *ngIf="showRecord" else elseBlock>
-<div class="card mb-3"  style="  width: 1205px;  position: relative; display: inline-block; padding-left: 20px; margin-top: 100px;">
+<div class="card mb-3"  style=" background-color:rgb(248, 227, 227); width: 1005px;  position: relative; display: inline-block; padding-left: 20px; margin-top: 100px; margin-left: 100px;">
   <div class="row no-gutters">
     <div class="col-md-4" style="align-items: center; padding-left: 50px; padding-top: 10px;">
       <img src="/../assets/images/profile-user.png"  width="100" height = "200" alt="Patient" style="align-items: center; align-content: center;">
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h2 class="card-title">Mr. {{patientDetails.firstName}} {{patientDetails.lastName}}</h2>
-        <h3 class="card-text">{{patientDetails.username}}</h3>
-        <h3 class="card-text"><small class="text-muted">{{patientDetails.phone}}</small></h3>
+        <h2 class="card-title"><mat-icon>perm_identity</mat-icon>Mr. {{patientDetails.firstName}} {{patientDetails.lastName}}</h2>
+        <h3 class="card-text"><mat-icon>perm_identity</mat-icon>{{patientDetails.username}}</h3>
+        <h3 class="card-text"><small class="text-muted"><mat-icon>phone</mat-icon>{{patientDetails.phone}}</small></h3>
       </div>
     </div>
   </div>
-</div>
-<div style="border: 2px solid black; width: 1205px;  position: relative; display: inline-block;">
-<div style="max-width: 30%; height: 100%; text-align: center; background-color: #dddada;"><h1 style="text-align: center; padding:80px; font-size: 50px; font-weight: 500;">Lab Reports</h1></div>
-</div>
-</div>
+<!-- </div>
+<h1 style="padding: 30px; font: 400;font-family: Verdana, Geneva, Tahoma, sans-serif;">Lab Records</h1>
+</div> -->
+
+
   <ng-template #elseBlock><h2 style="width: 100%; background-color: #F5F5F5; text-align: center;" >Please select a appointment to show details</h2></ng-template>
 
 

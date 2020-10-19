@@ -108,7 +108,12 @@ getPatientById(id: string): Observable<any>
 {
   return this.http.get(this.baseUrl + 'user/user-by-id/' + id);
 }
-
+getLabTestRecords(id: string): Observable<Labrecord[]>
+{
+  return this.http.get<GetLabTestrecord>(this.baseUrl + 'lab/get-lab-test-by-treatment-id/'+ id).pipe(
+    map(response => response.data)
+  );
+}
 getAllrecordsBtPatient(patientId):Observable<Treatement[]>
 {
   return this.http.get<GetRecord>(this.baseUrl + 'history/get-all-records-by-patient-id/' + patientId).pipe(
@@ -184,9 +189,14 @@ updatePaymentByAdmin(id): Observable<any>
   return this.http.get(this.baseUrl + 'history/update-payment/' + id);
 }
 }
+
+interface GetLabTestrecord
+{
+  data: Labrecord[];
+}
 interface GetPharmacy
 {
-  data : PharmacyCurrentRecord;
+  data: PharmacyCurrentRecord;
 }
 interface GetTestRecord
 {
