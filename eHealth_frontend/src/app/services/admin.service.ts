@@ -1,3 +1,6 @@
+import { Medicinerecord } from './../classes/medicinerecord';
+import { Labrecord } from './../classes/labrecord';
+import { Testrecord } from './../classes/testrecord';
 import { PharmacyCurrentRecord } from './../classes/pharmacy-current-record';
 import { Treatement } from './../classes/treatement';
 import { AppointmentResponse } from './../classes/appointment-response';
@@ -92,6 +95,14 @@ getAvailableSlots(physicianId: string, date: Date): Observable<Availablity[]>
 saveAppointment(appointment: Appointment, availabilityId: String): Observable<Appointment>{
   return this.http.post<Appointment>(`http://localhost:8085/appointment/set-appointment/${availabilityId}`, appointment);
 }
+saveTreatementInLab(labrecord: Labrecord) :Observable<any>
+{
+  return this.http.post(this.baseUrl + 'lab/add-lab-records', labrecord,httpOptions);
+}
+saveTreatementInPharmacy(phrecord: PharmacyCurrentRecord) :Observable<any>
+{
+  return this.http.post(this.baseUrl + 'pharmacy/add-record', phrecord,httpOptions);
+}
 
 getPatientById(id: string): Observable<any>
 {
@@ -125,13 +136,65 @@ deleteAppointmentById(appointmentId)
 
 
 // Pharmacy
-getAllRecords():Observable<PharmacyCurrentRecord[]>
+getAllRecords(): Observable<PharmacyCurrentRecord[]>
 {
-  return this.http.get<GetPharmacyRecord>(this.baseUrl +'pharmacy/get-all-records', httpOptions).pipe(
+  return this.http.get<GetPharmacyRecord>(this.baseUrl + 'pharmacy/get-all-records', httpOptions).pipe(
     map(response => response.data)
   );
 }
 
+getMedicineByName(name: string): Observable<Medicinerecord>
+{
+  return this.http.get<GetMedcineRecord>(this.baseUrl +'pharmacy/get-medicine-by-name/' +name).pipe(
+    map(response => response.data)
+  );
+}
+updatePaymentByPharmacy(id: string): Observable<PharmacyCurrentRecord>
+{
+  return this.http.get<GetPharmacy>(this.baseUrl + 'pharmacy/get-pharmacy-by-id/'+ id).pipe(
+    map(response => response.data)
+  );
+}
+
+insertHistory(pharmacy){
+  return this.http.post(this.baseUrl + 'pharmacy/history/insert-history', pharmacy, httpOptions);
+}
+deleteRecord(pharmacy): Observable<any>
+{
+  return this.http.get(this.baseUrl + 'pharmacy/delete-record/'+ pharmacy.id, httpOptions);
+}
+
+
+//hospital-admin
+getTreamentHistory(): Observable<Treatement[]>
+{
+  return this.http.get<GetRecord>(this.baseUrl + 'history/get-all-records-to-be-paid').pipe(
+    map(response => response.data)
+  );
+}
+getTestRecordByName(name: string) : Observable<Testrecord>
+{
+  return this.http.get<GetTestRecord>(this.baseUrl + 'history/get-test-by-name/' + name).pipe(
+    map(response => response.data)
+  );
+}
+
+updatePaymentByAdmin(id): Observable<any>
+{
+  return this.http.get(this.baseUrl + 'history/update-payment/' + id);
+}
+}
+interface GetPharmacy
+{
+  data : PharmacyCurrentRecord;
+}
+interface GetTestRecord
+{
+  data: Testrecord;
+}
+interface GetMedcineRecord
+{
+  data: Medicinerecord;
 }
 interface GetPharmacyRecord
 {

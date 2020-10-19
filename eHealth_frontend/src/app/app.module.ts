@@ -41,6 +41,10 @@ import { AddPharmacyComponent } from './hospital-admin/add-pharmacy/add-pharmacy
 import { MedicineComponent } from './pharmacy/medicine/medicine.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { PatientRecordComponent } from './profile/patient-record/patient-record.component';
+import { BillingComponent } from './hospital-admin/billing/billing.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +64,9 @@ import { PatientRecordComponent } from './profile/patient-record/patient-record.
     AddPharmacyComponent,
     MedicineComponent,
     Time24to12Format,
-    PatientRecordComponent
+    PatientRecordComponent,
+    BillingComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +84,7 @@ import { PatientRecordComponent } from './profile/patient-record/patient-record.
     MatGridListModule,
     BrowserAnimationsModule,
     MatTableModule,
-
+    ScrollingModule,
     RouterModule.forRoot([
       {
         path : '',
@@ -143,6 +149,10 @@ import { PatientRecordComponent } from './profile/patient-record/patient-record.
       {
         path : 'pharmacy_medicine/:adminId',
         component : MedicineComponent
+      },
+      {
+        path : 'hospital-admin/billing-panel/:adminId',
+        component : BillingComponent
       }
     ]),
 

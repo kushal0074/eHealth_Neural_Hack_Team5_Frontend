@@ -1,12 +1,22 @@
-.background
+.navbar-nav {
+  margin-left: auto;
+  margin-right: 30px;
+  font-size: 20px;
+}
+.admin_content
 {
+  top: 0;
+  margin: 0;
   padding: 0;
-  width: 100%;
-  float: left;
-  height: 50%;
-  background-image: url('../../assets/images/adminbackground.jpg');
+  width: 740px;
+  margin-left: 25%;
+  position: relative;
+  display: inline-block;
+  height: 89%;
+  background-image: url('/../../assets/images/adminbackground.jpg');
+  /* background-color: black; */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 50%;
-  border:1px solid black;
+  background-size: 100%;
+  overflow: hidden;
 }
