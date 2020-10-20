@@ -51,7 +51,7 @@ export class ConfirmBookingComponent implements OnInit {
     this.appointment.startTime = this.availabilty.startTime;
     this.appointment.endTime = this.availabilty.endTime;
     this.appointment.date = this.availabilty.date;
-    this.appointment.patientId = this.tokenService.getUser().id;
+    this.appointment.patientId = "v1234232";
 
     this.adminSerivce.saveAppointment(this.appointment, this.availabilty.availabilityId).subscribe(
       data => {
@@ -62,6 +62,7 @@ export class ConfirmBookingComponent implements OnInit {
   }
 
   sendEmail(){
+    console.log(this.appointment.appointmentId);
     this.emailDetails.appointmentId = this.appointment.appointmentId;
     this.emailDetails.patientName = this.tokenService.getUser().firstName + ' ' +this.tokenService.getUser().lastName;
     this.emailDetails.physicianName = this.physician.firstName + " " + this.physician.lastName;
@@ -79,6 +80,11 @@ export class ConfirmBookingComponent implements OnInit {
   confirmAppointment(){
     this.saveAppointment();
     this.sendEmail();
+  }
+
+  public logout()
+  {
+    this.adminSerivce.logout();
   }
 
 }

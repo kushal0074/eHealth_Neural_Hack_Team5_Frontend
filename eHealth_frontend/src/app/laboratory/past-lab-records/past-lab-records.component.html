@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><h2 style="margin-top: 10px; margin-left: 10px;">WELCOME TO EHEALTH  |  LABORATORY ADMIN PANEL</h2></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav" >
+      <ul class="navbar-nav" ml-auto>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/laboratory-panel">Home </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="viewPendingTests">Lab Results</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="viewPastLabRecords">Past Lab Records</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)= "logout()" href="login">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div id="list" data-role="main" class="row" *ngFor="let record of pastRecords">
+    <div class="col"> 
+        <div class="card border-white">
+            <div class="card-header">Test Id</div>
+                <div class="card-body">
+                    <p class="card-text">{{record.testId}}</p>
+                </div>
+            </div>
+    </div>
+
+    <div class="col">
+        <div class="card border-white">
+            <div class="card-header">Patient</div>
+                <div class="card-body">
+                    <p class="card-text">{{record.patientId}}</p>
+                </div>
+            </div>
+        <!--</div>-->
+    </div>
+
+    <div class="col">
+        <div class="card border-white">
+            <div class="card-header">Prescribed By </div>
+                <div class="card-body">
+                    <p class="card-text">{{record.physicianId}}</p>
+                </div>
+            </div>
+        </div>
+        <!--</div>-->
+
+    <div class="col">
+        <div class="card border-white">
+            <div class="card-header">Test Name</div>
+                <div class="card-body">
+                    <p class="card-text">{{record.testName}}</p>
+                </div>
+            </div>
+        </div>
+        <!--</div>-->
+
+    <div class="col">
+        <div class="card border-white">
+            <div class="card-header">Date</div>
+                <div class="card-body">
+                    <p class="card-text">{{record.date}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card border-white">
+                <div class="card-header">Time</div>
+                    <div class="card-body">
+                        <p class="card-text">{{record.time}}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col">
+                <div class="card border-white">
+                    <div class="card-header">Results</div>
+                        <div class="card-body">
+                            <p class="card-text">{{record.testResults}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card border-white">
+                        <div class="card-header">View Test Reports</div>
+                            <div class="card-body">
+                                <p class="card-text"><button  (click)="openModal(template, record.testId)">View Image</button></p>
+                            </div>
+                      </div>
+  
+                </div>
+
+</div>
+
+
+<ng-template #template>   
+    <div *ngIf=retrievedImage>
+        <img [src]="retrievedImage">
+    </div> 
+</ng-template>  
