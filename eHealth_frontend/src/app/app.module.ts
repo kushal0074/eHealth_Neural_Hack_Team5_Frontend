@@ -1,3 +1,4 @@
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PharmacyComponent } from './pharmacy/pharmacy.component';
 import { AddLabComponent } from './hospital-admin/add-lab/add-lab.component';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
@@ -5,7 +6,7 @@ import { ConfirmBookingComponent } from './book-appointment/confirm-booking/conf
 import { authInterceptorProviders } from './helper/auth-intercepter';
 import { BrowserModule } from '@angular/platform-browser';
 import { Component, NgModule, Pipe, PipeTransform } from '@angular/core';
-import { ModalModule } from 'ngx-bootstrap/modal';  
+
 // import Http module
 import { HttpModule} from '@angular/http';
 // import ReactiveFormsModule for reactive form
@@ -190,7 +191,7 @@ import { PastLabRecordsComponent } from './laboratory/past-lab-records/past-lab-
           }
         ]
       },
-      { 
+      {
         path : 'hospital-admin/billing-panel/:adminId',
         component : BillingComponent
       }

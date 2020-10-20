@@ -15,7 +15,7 @@ import { Time } from '@angular/common';
 })
 export class BookAppointmentComponent implements OnInit {
   physicians: Physician[];
-  public showDateAndTimeSlotFor: String;
+  public showDateAndTimeSlotFor: string;
   tokenService = new TokenStorageService();
   token = this.tokenService.getToken();
   availableSlots: Availablity[];
@@ -40,7 +40,7 @@ dateForm = new FormGroup({
 
   }
 
-  showDateAndSlot(physicianId: String){
+  showDateAndSlot(physicianId: string){
 
     console.log("physicanshow " + physicianId);
     this.showDateAndTimeSlotFor = physicianId;

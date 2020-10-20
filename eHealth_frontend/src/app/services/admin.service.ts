@@ -152,7 +152,7 @@ getAllTestRecords(): Observable<LabRecord[]>{
   );
 }
 getAllPastRecords(): Observable<LabRecordPast[]>{
-  return this.http.get<GetPastLabRecords>(`http://localhost:8090/laboratory/get-labrecords-all-past`).pipe(
+  return this.http.get<GetPastLabRecords>(`http://localhost:8086/laboratory/get-labrecords-all-past`).pipe(
     map(response => response.data)
   )
 }
@@ -238,7 +238,7 @@ upload(file: File, testId: string): Observable<HttpEvent<any>> {
   formData.append('file', file);
   formData.append('testId', testId);
 
-  const req = new HttpRequest('POST', `http://localhost:8090/laboratory/image/upload`, formData, {
+  const req = new HttpRequest('POST', `http://localhost:8086/laboratory/image/upload`, formData, {
     reportProgress: true,
     responseType: 'json'
   });
@@ -248,7 +248,7 @@ upload(file: File, testId: string): Observable<HttpEvent<any>> {
 }
 
 getFiles(): Observable<any> {
-  return this.http.get(`http://localhost:8090/laboratory/files`);
+  return this.http.get(`http://localhost:8086/laboratory/files`);
 }
 
 

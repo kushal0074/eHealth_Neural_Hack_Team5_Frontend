@@ -42,8 +42,6 @@
       <input type="text" class="form-control" name="testResults" [(ngModel)]="labRecordPast.testResults" placeholder="Enter Lab Test Results....">
     </div>
 
-<<<<<<< Updated upstream
-=======
     <div *ngIf="currentFile" class="progress">
       <div
         class="progress-bar progress-bar-info progress-bar-striped"
@@ -59,20 +57,20 @@
       <label class="btn btn-default">
         <input type="file" (change)="selectFile($event)" />
       </label>
-      
+
       <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
         Upload
       </button>
-      
+
       <div class="alert alert-light" role="alert">{{ message }}</div>
 
-      <!-- <div class="col-md-12"> 
+      <!-- <div class="col-md-12">
         <div *ngIf=retrievedImage>
 
             <img [src]="retrievedImage">
 
         </div> -->
-      
+
       <!-- <div class="card">
         <div class="card-header">List of Files</div>
         <ul
@@ -84,7 +82,6 @@
           </li>
         </ul>
       </div> -->
-    
->>>>>>> Stashed changes
+
     <button type="submit" class="btn btn-primary">Add Results</button>
   </form>

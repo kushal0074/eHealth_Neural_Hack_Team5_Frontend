@@ -51,7 +51,7 @@ export class ConfirmBookingComponent implements OnInit {
     this.appointment.startTime = this.availabilty.startTime;
     this.appointment.endTime = this.availabilty.endTime;
     this.appointment.date = this.availabilty.date;
-    this.appointment.patientId = "v1234232";
+    this.appointment.patientId = this.tokenService.getUser().id;
 
     this.adminSerivce.saveAppointment(this.appointment, this.availabilty.availabilityId).subscribe(
       data => {

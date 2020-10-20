@@ -61,8 +61,8 @@
         <div class="single-slot" *ngFor="let availableSlot of availableSlots" (click) = "moveToconfirmBooking(physician.physicianId,availableSlot.availabilityId)" >
           <span>{{availableSlot.startTime | time24to12Transform }}</span></div>
       </div>
-        
+
     </div>
   </div>
-  
+
 </div>

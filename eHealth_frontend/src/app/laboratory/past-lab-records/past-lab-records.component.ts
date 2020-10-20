@@ -1,14 +1,17 @@
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { LabRecordPast } from 'src/app/classes/lab-record-past';
 import { AdminService } from 'src/app/services/admin.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'; 
+
+import { LabRecordPast } from 'src/app/classes/lab-record-past';
+import { OnInit, TemplateRef, Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-past-lab-records',
   templateUrl: './past-lab-records.component.html',
   styleUrls: ['./past-lab-records.component.css']
 })
+
 export class PastLabRecordsComponent implements OnInit {
 
   pastRecords: LabRecordPast[] = [];
@@ -16,8 +19,10 @@ export class PastLabRecordsComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
 
-  modalRef: BsModalRef;
-  constructor(private adminService: AdminService, private httpClient: HttpClient,private modalService: BsModalService ) { }
+  private modalRef: BsModalRef;
+constructor(private adminService: AdminService, private httpClient: HttpClient, private modalService: BsModalService) {
+
+}
 
   ngOnInit(): void {
     this.listPastLabTestRecords();
@@ -36,7 +41,7 @@ export class PastLabRecordsComponent implements OnInit {
 
   getImage(testId: String) {
     //Make a call to Sprinf Boot to get the Image Bytes.
-    this.httpClient.get('http://localhost:8090/laboratory/image/get/' + testId)
+    this.httpClient.get('http://localhost:8086/laboratory/image/get/' + testId)
       .subscribe(
         res => {
           this.retrieveResonse = res;
@@ -48,14 +53,14 @@ export class PastLabRecordsComponent implements OnInit {
       );
   }
 
-  openModalWithClass(template: TemplateRef<any>) {  
-    this.modalRef = this.modalService.show(  
-      template,  
-      Object.assign({}, { class: 'gray modal-lg' })  
-    );  
-  }  
+  openModalWithClass(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+  }
 
-  openModal(template: TemplateRef<any>, testId: String ){
+  openModal(template: TemplateRef<any>, testId: string ){
     this.getImage(testId);
     this.openModalWithClass(template);
   }
