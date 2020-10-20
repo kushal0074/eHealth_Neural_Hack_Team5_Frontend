@@ -78,7 +78,6 @@ PhysicianRecord()
       if(data.status == 1)
       {
         alert('Submitted successfully');
-        console.log('TID......' + data.data.treatmentId);
         this.labrecord.treatmentId = data.data.treatmentId;
         this.phrecord.treatmentId = data.data.treatmentId;
         this.adminService.saveTreatementInLab(this.labrecord).subscribe(
@@ -93,8 +92,6 @@ PhysicianRecord()
           console.log('ph'+data);
         }
         );
-
-
         this.adminService.deleteAppointmentById(this.currentAppointmentId).subscribe(
           data =>
           {
@@ -118,7 +115,6 @@ PhysicianRecord()
     this.adminService.getPatientById(row.patientId).subscribe(
       data =>{
         this.showPatientTable = true;
-        console.log('firstName '+ data.data.firstName);
         this.patientSource = data.data;
         console.log(this.patientSource.firstName);
       }

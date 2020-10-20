@@ -112,11 +112,12 @@ updatePayment()
       this.adminService.deleteRecord(data).subscribe(
         data => {
           console.log(data);
+  window.location.reload();
+
         }
       );
     }
   );
-  window.location.reload();
 }
 calculation(){
     return this.medicineDatasource.reduce((summ, v) => summ += v.price, 0)
