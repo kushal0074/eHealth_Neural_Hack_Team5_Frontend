@@ -10,7 +10,7 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class PendingTestsComponent implements OnInit {
 
-  records : LabRecord[] = [];
+  records: LabRecord[] = [];
   physician: Physician = new Physician();
   physicians: Physician[] = [];
   filters = {
@@ -29,7 +29,7 @@ export class PendingTestsComponent implements OnInit {
       );
   }
 
-  getPhysician(physicianId: String){
+  getPhysician(physicianId: string){
     console.log("hvadsjvad");
     this.adminService.getPhysician(physicianId).subscribe(
       data => this.physician = data

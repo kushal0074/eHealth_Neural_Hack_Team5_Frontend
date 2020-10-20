@@ -36,9 +36,9 @@ export class AppointmentComponent implements OnInit {
     this.adminService.getAppointmentById(this.tokenService.getUser().id).subscribe(
       data => {
         this.dataSource = data;
-        console.log('appointment obj ' + data);
+        console.log(this.dataSource);
       }
-    )
+    );
 
   }
   formPerscrption = new FormGroup({
@@ -62,13 +62,13 @@ PhysicianRecord()
   this.labrecord.date = this.CurrentDate;
   this.labrecord.time = this.CurrentTime;
   this.labrecord.patientId = this.patientId;
-  this.labrecord.physicianId = this.patientId;
+  this.labrecord.physicianId = this.tokenService.getUser().id;
   this.labrecord.testName = this.Test.value;
 
   this.phrecord.date = this.CurrentDate;
   this.phrecord.time = this.CurrentTime;
   this.phrecord.patientId = this.patientId;
-  this.phrecord.physicianId = this.patientId;
+  this.phrecord.physicianId = this.tokenService.getUser().id;
   this.phrecord.medicine = this.Medicine.value;
   this.phrecord.prescription = this.Remarks.value;
 

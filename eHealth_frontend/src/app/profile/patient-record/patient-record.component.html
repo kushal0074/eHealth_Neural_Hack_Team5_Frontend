@@ -20,61 +20,6 @@
     </ul>
   </div>
 </nav>
-
-<!-- <div class ="table">
-  <mat-table  [dataSource] = "patientRecordList">
-  <ng-container matColumnDef = "treatmentId">
-    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Treatement ID</h2></mat-header-cell>
-    <mat-cell *matCellDef = "let list" >{{list.treatmentId}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "physicianId">
-    <mat-header-cell *matHeaderCellDef> <h2>Physician Id</h2> </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.physicianId}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "billAmount">
-    <mat-header-cell *matHeaderCellDef> <h2>Bill Ammount</h2> </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.billAmount}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "date">
-    <mat-header-cell *matHeaderCellDef> <h2>Date</h2> </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.date}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "time">
-    <mat-header-cell *matHeaderCellDef><h2>Time</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "labId">
-    <mat-header-cell *matHeaderCellDef><h2>Lab Id</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.labId}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "pharmacyRecordId">
-    <mat-header-cell *matHeaderCellDef><h2>Pharmacy Id</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.pharmacyRecordId}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "treatementRepostLink">
-    <mat-header-cell *matHeaderCellDef><h2>Treatement Link</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.treatementRepostLink}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "medicines">
-    <mat-header-cell *matHeaderCellDef><h2>Medicine</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.medicines}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "test">
-    <mat-header-cell *matHeaderCellDef><h2>Test</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.test}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef = "remarks">
-    <mat-header-cell *matHeaderCellDef><h2>Remarks</h2>  </mat-header-cell>
-    <mat-cell *matCellDef = "let list">{{list.remarks}}</mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef = "displayedColumns" >
-    <mat-row *matRowDef = "let row; columns: displayedColumns"></mat-row>
-  </mat-header-row>
-
-</mat-table> -->
-<!-- </div> -->
-<!-- side section -->
-
 <div class="main-content">
   <div class="section-content section-content-p30">
     <div class="container">
@@ -85,7 +30,7 @@
 
             </a>
             <div class="price" >Date : {{item.date}}</div>
-            <button (click) = "ViewRecord(item.patientId,item.physicianId)" class="primary-btn">View Record</button>
+            <button (click) = "ViewRecord(item.patientId,item.physicianId,item.treatmentId)" class="primary-btn">View Record</button>
           </div>
         </div>
       </div>
@@ -93,45 +38,57 @@
       </div>
       </div>
 <div class="vl"></div>
-<!-- <div class ="recordHolder" *ngIf="showRecord" else elseBlock>
-  <div>
-    <h1 style="text-align: center; margin-top: 100px; font-family:Verdana, Geneva, Tahoma, sans-serif;">Patient Details</h1>
-    <table cellspacing = "2">
-      <tr>
-        <td>First Name</td> <td>Kushal Sharma</td>
-      </tr>
-      <tr>
-        <td>Last Name</td> <td> Sharma</td>
-      </tr>
-      <tr>
-        <td>Username</td> <td>Kushal0074</td>
-      </tr>
-      <tr>
-        <td>Contact</td> <td>1234567890</td>
-      </tr>
-    </table>
-  </div>
-</div> -->
 <div *ngIf="showRecord" else elseBlock>
-<div class="card mb-3"  style="  width: 1205px;  position: relative; display: inline-block; padding-left: 20px; margin-top: 100px;">
+<div class="card mb-3"  style=" background-color:rgb(248, 227, 227); width: 1005px;  position: relative; display: inline-block; padding-left: 20px; margin-top: 100px; margin-left: 100px;">
   <div class="row no-gutters">
     <div class="col-md-4" style="align-items: center; padding-left: 50px; padding-top: 10px;">
       <img src="/../assets/images/profile-user.png"  width="100" height = "200" alt="Patient" style="align-items: center; align-content: center;">
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h2 class="card-title">Mr. {{patientDetails.firstName}} {{patientDetails.lastName}}</h2>
-        <h3 class="card-text">{{patientDetails.username}}</h3>
-        <h3 class="card-text"><small class="text-muted">{{patientDetails.phone}}</small></h3>
+        <h2 class="card-title">Mr. {{physicianDetails.firstName}} {{physicianDetails.lastName}}</h2>
+        <h3 class="card-text">{{physicianDetails.username}}</h3>
+        <h3 class="card-text"><small class="text-muted">{{physicianDetails.phone}}</small></h3>
       </div>
     </div>
   </div>
 </div>
-<div style="border: 2px solid black; width: 1205px;  position: relative; display: inline-block;">
-<div style="max-width: 30%; height: 100%; text-align: center; background-color: #dddada;"><h1 style="text-align: center; padding:80px; font-size: 50px; font-weight: 500;">Lab Reports</h1></div>
+<div style = "background-color:rgb(248, 227, 227); margin-top:20px; margin-left: 100px;width: 1005px;  position: relative; display: inline-block; padding-left: 20px;">
+  <h1 style="padding: 30px; font: 400;font-family: Verdana, Geneva, Tahoma, sans-serif;">Lab Results</h1>
+  <div class ="table">
+    <mat-table  [dataSource] = "dataSource">
+      <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+    <ng-container matColumnDef = "testName">
+      <mat-header-cell *matHeaderCellDef><h3 style="color: black;">Test Name</h3></mat-header-cell>
+      <mat-cell *matCellDef = "let list" >{{list.testName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef = "testResults">
+      <mat-header-cell *matHeaderCellDef><h3 style="color: black;">Test Results</h3>  </mat-header-cell>
+      <mat-cell *matCellDef = "let list">{{list.testResults}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef = "date">
+      <mat-header-cell *matHeaderCellDef> <h3 style="color: black;">Date</h3> </mat-header-cell>
+      <mat-cell *matCellDef = "let list">{{list.date}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef = "time">
+      <mat-header-cell *matHeaderCellDef><h3 style="color: black;"> Time</h3>  </mat-header-cell>
+      <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef = "testColumns" >
+      <mat-row *matRowDef = "let row; columns: testColumns"></mat-row>
+    </mat-header-row>
+
+  </mat-table>
+  </div>
+  </div>
+  <div ngif="showPrescription" style ="background-color:rgb(248, 227, 227); margin-top:20px; margin-left: 100px;width: 1005px;  position: relative; display: inline-block; padding-left: 20px;">
+    <h1 style="padding: 30px; font: 400;font-family: Verdana, Geneva, Tahoma, sans-serif;">Prescriptions</h1>
+    <table class ="table">
+    <tr><td>Medicines</td><td>{{treatmentRecord.medicines}}</td></tr>
+    <tr><td>Test</td><td>{{treatmentRecord.test}}</td></tr>
+    <tr><td>Prescription</td><td>{{treatmentRecord.prescription}}</td></tr>
+  </table>
 </div>
 </div>
   <ng-template #elseBlock><h2 style="width: 100%; background-color: #F5F5F5; text-align: center;" >Please select a appointment to show details</h2></ng-template>
-
-
-

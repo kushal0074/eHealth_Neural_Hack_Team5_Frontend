@@ -33,10 +33,10 @@ export class LaboratoryComponent implements OnInit {
     //     for(let i=0;i<this.records.length;i++){
     //       this.getPhysician(this.records[i]);
     //     }
-        
+
     //   }
     // );
-    
+
   }
 
   // filterExpenses(records: LabRecord[]){
@@ -56,7 +56,7 @@ export class LaboratoryComponent implements OnInit {
   //     );
   // }
 
-  getPhysician(physicianId: String){
+  getPhysician(physicianId: string){
     console.log("hvadsjvad");
     this.adminService.getPhysician(physicianId).subscribe(
       data => this.physician = data

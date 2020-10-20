@@ -125,11 +125,41 @@
         <h3 class="card-text"><small class="text-muted"><mat-icon>phone</mat-icon>{{patientDetails.phone}}</small></h3>
       </div>
     </div>
-  </div>
-<!-- </div>
-<h1 style="padding: 30px; font: 400;font-family: Verdana, Geneva, Tahoma, sans-serif;">Lab Records</h1>
-</div> -->
 
+  </div>
+
+
+ </div>
+ <div style = "background-color:rgb(248, 227, 227); margin-top:20px; margin-left: 100px;width: 1005px;  position: relative; display: inline-block; padding-left: 20px;">
+<h1 style="padding: 30px; font: 400;font-family: Verdana, Geneva, Tahoma, sans-serif;">Lab Records</h1>
+<div class ="table">
+  <mat-table  [dataSource] = "dataSource">
+    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+  <ng-container matColumnDef = "testName">
+    <mat-header-cell *matHeaderCellDef><h2 style="text-decoration-color: black; font-weight:bold;">Test Name</h2></mat-header-cell>
+    <mat-cell *matCellDef = "let list" >{{list.testName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "testResults">
+    <mat-header-cell *matHeaderCellDef><h2>Test Results</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.testResults}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "date">
+    <mat-header-cell *matHeaderCellDef> <h2>Date</h2> </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.date}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef = "time">
+    <mat-header-cell *matHeaderCellDef><h2> Time</h2>  </mat-header-cell>
+    <mat-cell *matCellDef = "let list">{{list.time}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef = "testColumns" >
+    <mat-row *matRowDef = "let row; columns: testColumns"></mat-row>
+  </mat-header-row>
+
+</mat-table>
+</div>
+</div>
+</div>
 
   <ng-template #elseBlock><h2 style="width: 100%; background-color: #F5F5F5; text-align: center;" >Please select a appointment to show details</h2></ng-template>
 

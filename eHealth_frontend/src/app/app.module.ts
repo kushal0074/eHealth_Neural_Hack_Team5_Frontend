@@ -160,22 +160,7 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
         component : MedicineComponent
       },
       {
-        
-        path : 'bookappointment',
-        
-        children : [
-          {
-            path: "",
-            component: BookAppointmentComponent
-          },
-          {
-            path: 'confirmBooking/:physicianId/:availabilityId',
-            component : ConfirmBookingComponent,
-          }  
-        ]
-      },
-      {
-        path: 'laboratory-panel',
+        path: 'laboratory-panel/:adminId',
 
         children:[
           {
@@ -190,7 +175,7 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
                 component: PendingTestsComponent
               },
               {
-                path: "addTestResults/:testId/for/:patientId/by/:physicianId",
+                path: "addTestResults/:testId/for/:patientId/by/:physicianId/:treatmentId",
                 component : AddTestResultsComponent
               }
             ]

@@ -23,7 +23,7 @@
 
 
   <div class="row" *ngFor="let record of records">
-    <div class="col"> 
+    <div class="col">
         <div class="card border-white">
             <div class="card-header">Test Id</div>
                 <div class="card-body">
@@ -79,12 +79,12 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="col">
                 <div class="card border-white">
                     <div class="card-header">Results</div>
                         <div class="card-body">
-                            <p class="card-text"><button routerLink="addTestResults/{{record.testId}}/for/{{record.patientId}}/by/{{record.physicianId}}">Add Test Results</button></p>
+                            <p class="card-text"><button routerLink="addTestResults/{{record.testId}}/for/{{record.patientId}}/by/{{record.physicianId}}/{{record.treatmentId}}">Add Test Results</button></p>
                         </div>
                     </div>
                 </div>

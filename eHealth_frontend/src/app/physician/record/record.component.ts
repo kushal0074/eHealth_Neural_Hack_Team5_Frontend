@@ -1,3 +1,4 @@
+import { LabRecordPast } from 'src/app/classes/lab-record-past';
 import { AdminDetail } from './../../classes/admin-detail';
 import { Treatement } from './../../classes/treatement';
 import { TokenStorageService } from './../../services/token-storage.service';
@@ -11,12 +12,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./record.component.css']
 })
 export class RecordComponent implements OnInit {
+
+  dataSource: LabRecordPast[];
+
   showRecord: boolean;
   patientDetails = new AdminDetail();
   public token = this.tokenService.getToken();
 
   patientRecordList: Treatement[];
   displayedColumns = ['treatmentId', 'physicianId', 'billAmount', 'date', 'time', 'labId', 'pharmacyRecordId', 'treatementRepostLink', 'medicines', 'test', 'remarks'];
+  testColumns = ['testName','testResults','date','time'];
   constructor(private adminService: AdminService, private router: Router, private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -53,7 +58,7 @@ export class RecordComponent implements OnInit {
     );
     this.adminService.getLabTestRecords(treatmentId).subscribe(
       data => {
-          console.log(data);
+          this.dataSource = data;
         }
       );
   }

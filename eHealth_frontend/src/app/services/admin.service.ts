@@ -70,7 +70,7 @@ getAppointmentById(id: string): Observable<AppointmentResponse[]>
     map(response => response.data)
   );
 }
-getPhysician(physicianId: String): Observable<Physician>
+getPhysician(physicianId: string): Observable<Physician>
 {
   return this.http.get<Physician>(`http://localhost:8085/appointment/get-physician/${physicianId}`).pipe(
     map(response => response)
@@ -92,7 +92,7 @@ getAvailibilty(availablityId: string): Observable<Availablity>
 
 getAvailableSlots(physicianId: string, date: Date): Observable<Availablity[]>
 {
-  
+
 
   return this.http.get<Availablity[]>(`http://localhost:8085/appointment/get-slots/${physicianId}/${date}`);
 }
@@ -113,12 +113,20 @@ getPatientById(id: string): Observable<any>
 {
   return this.http.get(this.baseUrl + 'user/user-by-id/' + id);
 }
-getLabTestRecords(id: string): Observable<Labrecord[]>
+getLabTestRecords(id: string): Observable<LabRecordPast[]>
 {
   return this.http.get<GetLabTestrecord>(this.baseUrl + 'lab/get-lab-test-by-treatment-id/'+ id).pipe(
     map(response => response.data)
   );
 }
+
+getTreatementById(treatmentid: string): Observable<Treatement>
+{
+  return this.http.get<GetTreatement>(this.baseUrl + 'history/get-history-by-id/' +treatmentid).pipe(
+    map(response => response.data)
+  );
+}
+
 getAllrecordsBtPatient(patientId):Observable<Treatement[]>
 {
   return this.http.get<GetRecord>(this.baseUrl + 'history/get-all-records-by-patient-id/' + patientId).pipe(
@@ -126,24 +134,25 @@ getAllrecordsBtPatient(patientId):Observable<Treatement[]>
   );
 }
 
+//lab-admin
 
 sendEmail(emailDetails: EmailDetails): Observable<EmailDetails>{
   return this.http.post<EmailDetails>(`http://localhost:8084//send/Email`, emailDetails);
 }
 getTestRecord(testId: String): Observable<LabRecord>
 {
-  return this.http.get<GetLabRecord>(`http://localhost:8090/laboratory/get-labrecord/${testId}`).pipe(
+  return this.http.get<GetLabRecord>(`http://localhost:8086/laboratory/get-labrecord/${testId}`).pipe(
     map(response => response.data)
   )
 }
 
 getAllTestRecords(): Observable<LabRecord[]>{
-  return this.http.get<GetTestRecords>(`http://localhost:8090/laboratory/get-labrecords-all`).pipe(
+  return this.http.get<GetTestRecords>(`http://localhost:8086/laboratory/get-labrecords-all`).pipe(
     map(response => response.data)
   );
 }
 saveTestRecordPast(labRecordPast : LabRecordPast, testId : String) : Observable<LabRecordPast>{
-  return this.http.post<GetTestRecordPast>(`http://localhost:8090/laboratory/add-past-testrecord/${testId}`, labRecordPast).pipe(
+  return this.http.post<GetTestRecordPast>(`http://localhost:8086/laboratory/add-past-testrecord/${testId}`, labRecordPast).pipe(
     map(response => response.data)
   );
 }
@@ -217,10 +226,12 @@ updatePaymentByAdmin(id): Observable<any>
   return this.http.get(this.baseUrl + 'history/update-payment/' + id);
 }
 }
-
+interface GetTreatement{
+  data: Treatement;
+}
 interface GetLabTestrecord
 {
-  data: Labrecord[];
+  data: LabRecordPast[];
 }
 interface GetPharmacy
 {
@@ -257,9 +268,6 @@ interface GetRecord
 {
     data: Treatement[];
 }
-
-
-
 interface GetResponse
 {
     data: AppointmentResponse[];

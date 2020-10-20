@@ -19,7 +19,8 @@ export class ConfirmBookingComponent implements OnInit {
   availabilty: Availablity = new Availablity();
   appointment: Appointment = new Appointment();
   emailDetails: EmailDetails = new EmailDetails();
-  
+
+
   constructor(private adminSerivce: AdminService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
 
@@ -62,11 +63,12 @@ export class ConfirmBookingComponent implements OnInit {
 
   sendEmail(){
     this.emailDetails.appointmentId = this.appointment.appointmentId;
-    this.emailDetails.patientName = "John";
+    this.emailDetails.patientName = this.tokenService.getUser().firstName + ' ' +this.tokenService.getUser().lastName;
     this.emailDetails.physicianName = this.physician.firstName + " " + this.physician.lastName;
     this.emailDetails.date = this.appointment.date;
     this.emailDetails.time = this.appointment.startTime;
-    this.emailDetails.patientEmail = "gautambhatiani.1999@gmail.com";
+    console.log(this.tokenService.getUser().firstName + ' '+this.tokenService.getUser().email);
+    this.emailDetails.patientEmail = this.tokenService.getUser().email;
     this.adminSerivce.sendEmail(this.emailDetails).subscribe(
       data => {
         console.log("Email Sent!!");

@@ -32,6 +32,10 @@ export class LoginComponent implements OnInit {
       {
         this.router.navigate(['physician-panel', this.tokenService.getToken()]);
       }
+      else if(this.tokenService.getUser().roles == 'LABORATORY')
+      {
+        this.router.navigate(['laboratory-panel', this.tokenService.getToken()]);
+      }
       else{
       this.router.navigate(['profile', this.tokenService.getToken()]);
     }
@@ -62,6 +66,7 @@ else{
           {
             alert("Invalid username and password");
           }
+
           else if(data.token != null)
             {
               this.tokenService.saveToken(data.token);
@@ -76,6 +81,10 @@ else{
               }
               else if(this.tokenService.getUser().roles == 'PHARMACY'){
                 this.router.navigate(['pharmacy_home', this.tokenService.getToken()]);
+              }
+              else if(this.tokenService.getUser().roles == 'LABORATORY')
+              {
+                this.router.navigate(['laboratory-panel', this.tokenService.getToken()]);
               }
               else {
                 this.router.navigate(['profile', this.tokenService.getToken()]);

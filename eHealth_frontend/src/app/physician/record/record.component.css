@@ -114,6 +114,15 @@ section{
 .section-content-p30{
     padding:0 30px
 }
+.table {
+  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-left: 40px;
+  margin: auto;
+  width: 90%;
+  border: 3px solid green;
+  padding: 10px;
+}
 
 
 .main-content.page-m{

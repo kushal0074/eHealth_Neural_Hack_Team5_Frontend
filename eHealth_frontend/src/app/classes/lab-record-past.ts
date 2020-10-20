@@ -2,10 +2,11 @@ import { Time } from '@angular/common';
 
 export class LabRecordPast {
     testId: string;
-    testName: String;
-    physicianId: String;
-    patientId: String;
-    result: String;
-    date: String;
-    time: String;
+    treatmentId: string;
+    testName: string;
+    physicianId: string;
+    patientId: string;
+    testResults: string;
+    date: string;
+    time: string;
 }
