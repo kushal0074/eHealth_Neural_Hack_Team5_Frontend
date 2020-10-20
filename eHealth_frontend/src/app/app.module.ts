@@ -5,6 +5,7 @@ import { ConfirmBookingComponent } from './book-appointment/confirm-booking/conf
 import { authInterceptorProviders } from './helper/auth-intercepter';
 import { BrowserModule } from '@angular/platform-browser';
 import { Component, NgModule, Pipe, PipeTransform } from '@angular/core';
+import { ModalModule } from 'ngx-bootstrap/modal';  
 // import Http module
 import { HttpModule} from '@angular/http';
 // import ReactiveFormsModule for reactive form
@@ -49,6 +50,7 @@ import { PendingTestsComponent } from './laboratory/pending-tests/pending-tests.
 import { BillingComponent } from './hospital-admin/billing/billing.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import { PastLabRecordsComponent } from './laboratory/past-lab-records/past-lab-records.component';
 
 
 @NgModule({
@@ -74,7 +76,8 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
     AddTestResultsComponent,
     PendingTestsComponent,
     BillingComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    PastLabRecordsComponent
   ],
   imports: [
     FormsModule,
@@ -93,6 +96,7 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
     MatGridListModule,
     BrowserAnimationsModule,
     MatTableModule,
+    ModalModule.forRoot(),
     ScrollingModule,
     RouterModule.forRoot([
       {
@@ -179,10 +183,14 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
                 component : AddTestResultsComponent
               }
             ]
+          },
+          {
+            path: "viewPastLabRecords",
+            component: PastLabRecordsComponent
           }
         ]
       },
-      {
+      { 
         path : 'hospital-admin/billing-panel/:adminId',
         component : BillingComponent
       }

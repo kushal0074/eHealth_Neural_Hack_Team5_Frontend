@@ -8,7 +8,7 @@ import { DoctorDetail } from './../classes/doctor-detail';
 import { FormGroup } from '@angular/forms';
 import { TokenStorageService } from './token-storage.service';
 import { catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -151,6 +151,11 @@ getAllTestRecords(): Observable<LabRecord[]>{
     map(response => response.data)
   );
 }
+getAllPastRecords(): Observable<LabRecordPast[]>{
+  return this.http.get<GetPastLabRecords>(`http://localhost:8090/laboratory/get-labrecords-all-past`).pipe(
+    map(response => response.data)
+  )
+}
 saveTestRecordPast(labRecordPast : LabRecordPast, testId : String) : Observable<LabRecordPast>{
   return this.http.post<GetTestRecordPast>(`http://localhost:8086/laboratory/add-past-testrecord/${testId}`, labRecordPast).pipe(
     map(response => response.data)
@@ -225,6 +230,28 @@ updatePaymentByAdmin(id): Observable<any>
 {
   return this.http.get(this.baseUrl + 'history/update-payment/' + id);
 }
+
+
+upload(file: File, testId: string): Observable<HttpEvent<any>> {
+  const formData: FormData = new FormData();
+
+  formData.append('file', file);
+  formData.append('testId', testId);
+
+  const req = new HttpRequest('POST', `http://localhost:8090/laboratory/image/upload`, formData, {
+    reportProgress: true,
+    responseType: 'json'
+  });
+  console.log("sadhbdash");
+  console.log(req);
+  return this.http.request(req);
+}
+
+getFiles(): Observable<any> {
+  return this.http.get(`http://localhost:8090/laboratory/files`);
+}
+
+
 }
 interface GetTreatement{
   data: Treatement;
@@ -253,6 +280,10 @@ interface GetTestRecordPast
 interface GetLabRecord
 {
   data : LabRecord
+}
+interface GetPastLabRecords
+{
+  data : LabRecordPast[];
 }
 
 interface GetTestRecords

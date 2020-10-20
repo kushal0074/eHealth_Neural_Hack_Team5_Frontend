@@ -15,7 +15,7 @@ import { Time } from '@angular/common';
 })
 export class BookAppointmentComponent implements OnInit {
   physicians: Physician[];
-  public showDateAndTimeSlotFor: boolean;
+  public showDateAndTimeSlotFor: String;
   tokenService = new TokenStorageService();
   token = this.tokenService.getToken();
   availableSlots: Availablity[];
@@ -29,7 +29,7 @@ dateForm = new FormGroup({
 
 
   ngOnInit(): void {
-    this.showDateAndTimeSlotFor = false;
+    // this.showDateAndTimeSlotFor = false;
   }
 
   listPhysicians(event: any){
@@ -43,7 +43,7 @@ dateForm = new FormGroup({
   showDateAndSlot(physicianId: String){
 
     console.log("physicanshow " + physicianId);
-    this.showDateAndTimeSlotFor = true;
+    this.showDateAndTimeSlotFor = physicianId;
     console.log(this.showDateAndTimeSlotFor);
     this.availableSlots = [];
 
